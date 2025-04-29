@@ -14,7 +14,15 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@stream-platform/auth-data-access": [
+        "libs/auth/data-access/src/index.ts"
+      ],
+      "@stream-platform/users-data-access": [
+        "libs/users/data-access/src/index.ts"
+      ],
+      "users/Module": ["users/src/app/remote-entry/entry.module.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
