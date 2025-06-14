@@ -1,0 +1,34 @@
+{
+  "name": "shared-ui",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "shared-ui/src",
+  "prefix": "lib",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "project": "shared-ui/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "shared-ui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "shared-ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "tsConfig": "shared-ui/tsconfig.spec.json",
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ]
+      }
+    }
+  }
+}

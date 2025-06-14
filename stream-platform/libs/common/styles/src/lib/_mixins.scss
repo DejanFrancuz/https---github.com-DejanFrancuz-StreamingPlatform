@@ -1,0 +1,18 @@
+@import 'variables'; // osiguraj da su varijable dostupne
+
+/// Media queries
+@mixin respond-to($break) {
+  @if $break == sm {
+    @media (max-width: $bp-sm) { @content; }
+  } @else if $break == md {
+    @media (max-width: $bp-md) { @content; }
+  } @else if $break == lg {
+    @media (max-width: $bp-lg) { @content; }
+  }
+}
+
+/// Apply background & text color
+@mixin theme-colors($bg, $fg) {
+  background-color: $bg;
+  color: $fg;
+}

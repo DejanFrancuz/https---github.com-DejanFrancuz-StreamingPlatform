@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { appRoutes } from './app.routes';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { ShellLayoutComponent } from './layout/layout.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes)],
-  providers: [],
-  bootstrap: [AppComponent],
+  declarations: [ShellLayoutComponent],
+  imports: [BrowserModule, AppRoutingModule, CommonSharedUiModule],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+  }],
 })
 export class AppModule {}

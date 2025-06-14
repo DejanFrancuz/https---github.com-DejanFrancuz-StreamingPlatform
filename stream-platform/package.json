@@ -2,7 +2,11 @@
   "name": "@stream-platform/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "next build",
+    "lint": "eslint ./src",
+    "test": "node ./run-tests.js"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~19.2.0",

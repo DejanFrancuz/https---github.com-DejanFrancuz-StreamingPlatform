@@ -1,0 +1,9 @@
+.shell-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--sp-md); // prostor za fixed header
+  }
+  
+  .shell-content {
+    padding: var(--sp-md);
+  }

@@ -22,7 +22,10 @@
             "input": "apps/shell/public"
           }
         ],
-        "styles": ["apps/shell/src/styles.scss"],
+        "styles": [
+          "libs/common/shared-styles/src/lib/styles/index.scss",
+          "apps/shell/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/shell/webpack.config.ts"

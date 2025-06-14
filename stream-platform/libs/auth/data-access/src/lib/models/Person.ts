@@ -1,5 +1,6 @@
 export interface Person {
     username: string,
     email: string,
-    personId: string,
+    userId: number,
+    permissions: String[],
 }
