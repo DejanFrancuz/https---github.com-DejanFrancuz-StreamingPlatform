@@ -20,4 +20,10 @@ export class AuthService {
   logout(): Observable<void> {
     return this.httpClient.post<void>('http://localhost:8080/auth/logout', {});
   }
+
+  getPersonData(): Observable<Person> {
+    return this.httpClient.get<Person>(
+      'http://localhost:8080/auth/get-person',
+    );
+  }
 }

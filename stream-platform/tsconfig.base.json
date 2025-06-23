@@ -18,7 +18,9 @@
       "@stream-platform/auth-data-access": [
         "libs/auth/data-access/src/index.ts"
       ],
-      "@stream-platform/common-shared-ui": ["libs/common/shared-ui/src/index.ts"],
+      "@stream-platform/common-shared-ui": [
+        "libs/common/shared-ui/src/index.ts"
+      ],
       "@stream-platform/users-data-access": [
         "libs/users/data-access/src/index.ts"
       ]

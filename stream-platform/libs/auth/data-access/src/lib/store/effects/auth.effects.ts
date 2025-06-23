@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AuthActions from '../actions/auth.actions';
-import { AuthService } from '../services/auth.service';
-import { map, exhaustMap, catchError, switchMap } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
+import { map, exhaustMap, catchError, switchMap, tap, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthActionsApi } from '../actions/auth-index.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -12,9 +13,9 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(action =>
-        this.authService.login({ username: action.loginForm.username, password: action.loginForm.password }).pipe(
+        this.authService.login({ email: action.loginForm.email, password: action.loginForm.password }).pipe(
           map(personData => AuthActionsApi.loginSuccess({ personData })),
-          catchError(error => of(AuthActions.loginFailure({ error })))
+          catchError(error => of(AuthActionsApi.loginFailure({ error })))
         )
       )
     )
@@ -25,12 +26,37 @@ export class AuthEffects {
       ofType(AuthActions.logout),
       exhaustMap(() =>
         this.authService.logout().pipe(
-          map(() => AuthActions.logoutSuccess()),
-          catchError(() => of(AuthActions.logoutSuccess()))
+          map(() => AuthActionsApi.logoutSuccess()),
+          catchError( error => of(AuthActionsApi.logoutFailure( error )))
         )
       )
     )
   );
 
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  loadPerson$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loadPerson),
+      tap(() => console.log('🚀 loadPerson effect triggered')),
+      mergeMap(() =>
+        this.authService.getPersonData().pipe(
+          tap(() => console.log('💡 backend call sent')),
+          map((personData) =>
+            AuthActionsApi.loadPersonSuccess({ personData })
+          ),
+          catchError((error) =>
+            of(AuthActionsApi.loadPersonFail({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  authError$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActionsApi.loadPersonFail),
+      tap(() => this.router.navigate(['/login']))
+    )
+  , { dispatch: false });
+
+  constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
 }

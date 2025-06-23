@@ -2,6 +2,8 @@ import { createReducer, on } from '@ngrx/store';
 import {AuthActions, AuthActionsApi} from '../actions/auth-index.actions';
 import { Person } from '../../models/Person';
 
+export const AUTH_FEATURE_KEY = 'auth';
+
 export interface AuthState {
   person: Person | null;
   loading: boolean;
@@ -22,3 +24,9 @@ export const authReducer = createReducer(
   on(AuthActionsApi.loginFailure, (state, action) => ({ ...state, error: action.error, loading: false })),
   on(AuthActionsApi.logoutSuccess, _ => initialState)
 );
+
+
+function createEntityAdapter<T>() {
+  throw new Error('Function not implemented.');
+}
+

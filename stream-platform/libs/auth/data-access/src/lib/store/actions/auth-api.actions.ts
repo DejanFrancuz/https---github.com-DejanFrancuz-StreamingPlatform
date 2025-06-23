@@ -13,6 +13,10 @@ export const loginFailure = createAction(
 
 export const logoutSuccess = createAction('[Auth] Logout Success');
 
-export const logoutFailure = createAction('[Auth] Logout Failure');
+export const logoutFailure = createAction('[Auth] Logout Failure', props<{ error: string }>());
 
+export const loadPersonSuccess = createAction('[Auth] Load Person Success',
+  props<{ personData: Person }>()
+);
 
+export const loadPersonFail = createAction('[Auth] Load Person Fail', props<{ error: string }>());

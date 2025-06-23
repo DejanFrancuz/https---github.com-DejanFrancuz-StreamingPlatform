@@ -3,20 +3,19 @@ import { Route, RouterModule } from '@angular/router';
 import { ShellLayoutComponent } from './layout/layout.component';
 
 export const appRoutes: Route[] = [
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-  {
+{
     path: '',
     component: ShellLayoutComponent,
     children: [
-      { path: '', component: ShellLayoutComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
         path: 'users',
-        loadChildren: () => import('users/Module').then((m) => m!.UsersModule),
+        loadChildren: () => import('users/Module').then((m) => m.UsersModule),
       },
+      {
+        path: 'login',
+        loadChildren: () => import('login/Module').then((m) => m.LoginModule),
+      }
     ],
   },
 ];

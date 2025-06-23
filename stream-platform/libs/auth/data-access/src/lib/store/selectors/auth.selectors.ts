@@ -1,15 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AUTH_FEATURE_KEY, AuthState, authAdapter } from './auth.reducer';
+import { AUTH_FEATURE_KEY, AuthState } from '../reducers/auth.reducer';
 
 // Lookup the 'Auth' feature state managed by NgRx
 export const selectAuthState =
   createFeatureSelector<AuthState>(AUTH_FEATURE_KEY);
 
-const { selectAll, selectEntities } = authAdapter.getSelectors();
-
 export const selectAuthLoaded = createSelector(
   selectAuthState,
-  (state: AuthState) => state.loaded
+  (state: AuthState) => state.loading
 );
 
 export const selectAuthError = createSelector(
@@ -17,23 +15,7 @@ export const selectAuthError = createSelector(
   (state: AuthState) => state.error
 );
 
-export const selectAllAuth = createSelector(
+export const selectAuthPerson = createSelector(
   selectAuthState,
-  (state: AuthState) => selectAll(state)
-);
-
-export const selectAuthEntities = createSelector(
-  selectAuthState,
-  (state: AuthState) => selectEntities(state)
-);
-
-export const selectSelectedId = createSelector(
-  selectAuthState,
-  (state: AuthState) => state.selectedId
-);
-
-export const selectEntity = createSelector(
-  selectAuthEntities,
-  selectSelectedId,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+  (state: AuthState) => state.person
 );

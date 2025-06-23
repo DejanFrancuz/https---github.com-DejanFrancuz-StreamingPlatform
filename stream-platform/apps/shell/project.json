@@ -23,7 +23,7 @@
           }
         ],
         "styles": [
-          "libs/common/shared-styles/src/lib/styles/index.scss",
+          "libs/common/styles/src/lib/index.scss",
           "apps/shell/src/styles.scss"
         ],
         "scripts": [],

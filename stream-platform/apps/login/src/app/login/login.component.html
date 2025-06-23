@@ -1,0 +1,24 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-4 max-w-md mx-auto flex flex-col space-y-4">
+  <h2 class="text-xl font-semibold text-center">Prijava</h2>
+
+  <input
+    formControlName="email"
+    placeholder="Email"
+    class="border p-2 rounded"
+    type="email"
+  />
+
+  <input
+    formControlName="password"
+    placeholder="Lozinka"
+    class="border p-2 rounded"
+    type="password"
+  />
+
+  <button
+    class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+    [disabled]="loginForm.invalid"
+  >
+    Prijavi se
+  </button>
+</form>
