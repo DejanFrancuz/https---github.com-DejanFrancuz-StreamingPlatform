@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
 import * as AuthActions from '../actions/auth.actions';
-// import * as AuthFeature from '../auth.reducers';
 import * as AuthSelectors from '../selectors/auth.selectors';
 import { LoginForm } from '../../models/Login';
 

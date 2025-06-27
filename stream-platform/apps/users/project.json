@@ -12,17 +12,20 @@
       "options": {
         "outputPath": "dist/users",
         "index": "apps/users/src/index.html",
-        "main": "apps/users/src/main.ts",
+        "main": "apps/users/src/app/users.module.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/users/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
+        "inlineStyleLanguage": "css",
         "assets": [
           {
             "glob": "**/*",
             "input": "apps/users/public"
           }
         ],
-        "styles": ["apps/users/src/styles.scss"],
+        "styles": [
+          "node_modules/tailwindcss/tailwind.css",
+          "libs/common/styles/src/lib/index.css"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/users/webpack.config.ts"

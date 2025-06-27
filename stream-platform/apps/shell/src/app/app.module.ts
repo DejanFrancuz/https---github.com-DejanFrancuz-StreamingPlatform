@@ -11,10 +11,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthDataAccessModule } from '@stream-platform/auth-data-access';
 
-// export function initAuthFactory(authFacade: AuthFacade) {
-//   return () => authFacade.init();
-// }
-
 @NgModule({
   declarations: [AppComponent, ShellLayoutComponent],
   exports: [ShellLayoutComponent],
@@ -26,12 +22,6 @@ import { AuthDataAccessModule } from '@stream-platform/auth-data-access';
       useClass: AuthInterceptor,
       multi: true
   },
-//   {
-//   provide: APP_INITIALIZER,
-//   useFactory: initAuthFactory,
-//   deps: [AuthFacade],
-//   multi: true
-// }
 ],
   bootstrap: [ShellLayoutComponent]
 })
