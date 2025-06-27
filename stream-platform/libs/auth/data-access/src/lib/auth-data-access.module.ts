@@ -13,7 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptor
     StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.authReducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
-  providers: [AuthFacade, 
-    ],
+  // providers: [AuthFacade, 
+  //   ],
 })
 export class AuthDataAccessModule {}

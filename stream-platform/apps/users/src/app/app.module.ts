@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(
+    RouterModule.forChild(
       [
         {
           path: '',
@@ -17,7 +17,6 @@ import { AppComponent } from './app.component';
             ),
         },
       ],
-      { initialNavigation: 'enabledBlocking' }
     ),
   ],
   providers: [],

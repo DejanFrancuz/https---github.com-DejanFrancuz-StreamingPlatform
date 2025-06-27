@@ -7,12 +7,14 @@ export const AUTH_FEATURE_KEY = 'auth';
 export interface AuthState {
   person: Person | null;
   loading: boolean;
+  personLoading: boolean;
   error: string | null;
 }
 
 export const initialState: AuthState = {
   person: null,
   loading: false,
+  personLoading: false,
   error: null,
 };
 
@@ -22,11 +24,11 @@ export const authReducer = createReducer(
   on(AuthActionsApi.loginSuccess, (state, action) => 
     ({ ...state, person: action.personData, loading: false })),
   on(AuthActionsApi.loginFailure, (state, action) => ({ ...state, error: action.error, loading: false })),
-  on(AuthActionsApi.logoutSuccess, _ => initialState)
+  on(AuthActionsApi.logoutSuccess, _ => initialState),
+
+  on(AuthActions.loadPerson, state => ({ ... state, personLoading: true, error: null })),
+  on(AuthActionsApi.loadPersonSuccess, (state, action) => 
+    ({ ...state, person: action.personData, personLoading: false })),
+  on(AuthActionsApi.loadPersonFail, (state, action) => ({ ...state, error: action.error, personLoading: false })),
 );
-
-
-function createEntityAdapter<T>() {
-  throw new Error('Function not implemented.');
-}
 

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'lib-shell-toolbar',
   standalone: false,
   templateUrl: './shell-toolbar.component.html',
-  styleUrl: './shell-toolbar.component.scss',
+  styleUrl: './shell-toolbar.component.css',
 })
 export class ShellToolbarComponent {
   dark = false;

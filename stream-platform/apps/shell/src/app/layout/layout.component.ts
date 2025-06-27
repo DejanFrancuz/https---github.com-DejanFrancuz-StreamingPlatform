@@ -1,9 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthFacade } from '@stream-platform/auth-data-access';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shell-layout',
   standalone: false,
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  styleUrl: './layout.component.css',
 })
-export class ShellLayoutComponent {}
+export class ShellLayoutComponent implements OnInit{
+
+  public personLoading$!: Observable<boolean>;
+
+  constructor(private authFacade: AuthFacade) {}
+
+  ngOnInit(): void {
+    console.log("dang bro why r u calling this so many times ?");
+    this.personLoading$ = this.authFacade.personLoaded$;
+    this.authFacade.init();
+  }
+  
+}

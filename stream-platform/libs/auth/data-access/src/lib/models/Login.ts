@@ -1,7 +1,7 @@
 import { Person } from "./Person";
 
 export interface LoginForm {
-  email: string;
+  username: string;
   password: string;
 }
 

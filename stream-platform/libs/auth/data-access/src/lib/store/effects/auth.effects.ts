@@ -13,9 +13,15 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(action =>
-        this.authService.login({ email: action.loginForm.email, password: action.loginForm.password }).pipe(
-          map(personData => AuthActionsApi.loginSuccess({ personData })),
-          catchError(error => of(AuthActionsApi.loginFailure({ error })))
+        this.authService.login({ username: action.loginForm.username, password: action.loginForm.password }).pipe(
+          map(personData => {
+            this.router.navigate(['/dashboard']);
+            return AuthActionsApi.loginSuccess({ personData })
+        }),
+          catchError(error => { 
+            this.router.navigate(['/auth/login']);
+            return of(AuthActionsApi.loginFailure({ error }))
+        })
         )
       )
     )
@@ -54,7 +60,7 @@ export class AuthEffects {
   authError$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActionsApi.loadPersonFail),
-      tap(() => this.router.navigate(['/login']))
+      tap(() => this.router.navigate(['/auth/login']))
     )
   , { dispatch: false });
 

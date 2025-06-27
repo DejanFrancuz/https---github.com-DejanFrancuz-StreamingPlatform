@@ -15,7 +15,7 @@
         "main": "apps/shell/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/shell/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
+        "inlineStyleLanguage": "css",
         "assets": [
           {
             "glob": "**/*",
@@ -23,8 +23,8 @@
           }
         ],
         "styles": [
-          "libs/common/styles/src/lib/index.scss",
-          "apps/shell/src/styles.scss"
+          "node_modules/tailwindcss/tailwind.css",
+          "libs/common/styles/src/lib/index.css"
         ],
         "scripts": [],
         "customWebpackConfig": {
