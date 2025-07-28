@@ -112,6 +112,14 @@
       "options": {
         "targetName": "lint"
       }
+    },
+     {
+      "plugin": "@nx/next/plugin",
+      "options": {
+        "buildTargetName": "next:build",
+        "devTargetName": "dev",
+        "startTargetName": "start"
+      }
     }
   ],
   "generators": {

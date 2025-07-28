@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "next build",
-    "lint": "eslint ./src",
+    "build": "nx next:build && echo 'Build complete'",
+    "lint": "nx eslint:lint",
     "test": "node ./run-tests.js"
   },
   "private": true,
