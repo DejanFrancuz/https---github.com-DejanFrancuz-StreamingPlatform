@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [UsersListComponent],
   imports: [
-    BrowserModule,
+    CommonModule,
     RouterModule.forChild(
       [
         {

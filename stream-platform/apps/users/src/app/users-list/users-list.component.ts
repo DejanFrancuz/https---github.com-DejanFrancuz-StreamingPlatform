@@ -12,10 +12,10 @@ import { User } from 'libs/users/data-access/src/lib/models/User';
 export class UsersListComponent {
 
   users: User[] | null = [];
-  authorities: String[] | null = [];
+  authorities: string[] | null = [];
 
   constructor(private userFacade: UserFacade) {
-    
+
   }
 
   ngOnInit(): void {

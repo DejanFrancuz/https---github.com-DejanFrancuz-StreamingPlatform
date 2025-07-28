@@ -9,19 +9,21 @@
 
 .nav-links {
   display: flex;
+  justify-content: center;
+  align-items: center;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: var(--sp-xs);
   gap: 1.5rem;
 }
 
 .nav-item a {
   color: var(--color-text);
-  text-decoration: none;
+  /* text-decoration: none; */
   font-weight: var(--btn-font-weight);
   padding: var(--btn-padding-y) 0;
   transition: var(--btn-transition);
-  position: relative;
+  /* position: relative; */
 }
 
 .nav-item a:hover {
@@ -48,12 +50,12 @@
   .navbar {
     padding: 0.5rem;
   }
-  
+
   .nav-links {
     flex-direction: column;
     gap: 0;
   }
-  
+
   .nav-item a {
     padding: var(--btn-padding-y) var(--btn-padding-x);
     display: block;

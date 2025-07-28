@@ -1,17 +1,17 @@
 :root {
   /* Colors */
-  --color-primary: #3f51b5;
-  --color-accent: #ff4081;
-  --color-background: #f5f5f5;
-  --color-surface: #ffffff;
-  --color-text: #333333;
+  --color-primary: #000000;
+  --color-accent: #FFF07C;
+  --color-background: #F0F7EE;
+  --color-surface: #5D737E;
+  --color-text: #87BBA2;
 
   /* Spacing */
   --sp-xxs: 0.25rem;
   --sp-xs: 0.5rem;
   --sp-sm: 1rem;
-  --sp-md: 2rem;
-  --sp-lg: 4rem;
+  --sp-md: 4rem;
+  --sp-lg: 10rem;
 
   /* Typography */
   --font-family-base: 'Roboto', sans-serif;
@@ -34,7 +34,7 @@
   --btn-padding-x: var(--sp-sm);
   --btn-padding-y: var(--sp-xs);
   --btn-radius: 0.375rem;
-  --btn-font-weight: 500;
+  --btn-font-weight: 600;
   --btn-transition: all 0.2s ease-in-out;
 }
 

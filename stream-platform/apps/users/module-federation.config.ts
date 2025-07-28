@@ -3,7 +3,7 @@ import { ModuleFederationConfig } from '@nx/module-federation';
 const config: ModuleFederationConfig = {
   name: 'users',
   exposes: {
-    './Module': 'apps/users/src/app/users/users.module.ts',
+    './Module': 'apps/users/src/app/users.module.ts',
   },
 };
 

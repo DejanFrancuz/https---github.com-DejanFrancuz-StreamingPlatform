@@ -4,22 +4,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sp-sm) var(--sp-md);
+    padding: var(--sp-sm) var(--sp-lg);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-  
+
     .logo {
       font-size: 1.25rem;
       font-weight: bold;
     }
-  
+
     .actions {
       display: flex;
       align-items: center;
       gap: var(--sp-xs);
-  
+
       button {
         background-color: var(--color-surface);
         color:            var(--color-primary);
@@ -28,7 +28,7 @@
         border-radius: 4px;
         cursor: pointer;
       }
-  
+
       select {
         background: var(--color-surface);
         color:      var(--color-text);
@@ -38,6 +38,3 @@
       }
     }
   }
-  
-  /* kad je dark-theme na body, varijable su već prepisane */
-  

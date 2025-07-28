@@ -1,3 +1,4 @@
+import { UsersDataAccessModule } from '@stream-platform/users-data-access';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ShellLayoutComponent } from './layout/layout.component';
@@ -14,7 +15,7 @@ import { AuthDataAccessModule } from '@stream-platform/auth-data-access';
 @NgModule({
   declarations: [AppComponent, ShellLayoutComponent],
   exports: [ShellLayoutComponent],
-  imports: [BrowserModule, AppRoutingModule, MatProgressSpinnerModule, CommonSharedUiModule,StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), AuthDataAccessModule],
+  imports: [BrowserModule, AppRoutingModule, MatProgressSpinnerModule, CommonSharedUiModule,StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), AuthDataAccessModule, UsersDataAccessModule],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     {

@@ -2,9 +2,9 @@
 <header class="toolbar">
     <div class="logo">StreamPlatform</div>
     <div class="actions">
-      <button (click)="toggleTheme()">
-        {{ dark ? 'Dark' : 'Light' }}
-      </button>
+      <span (click)="toggleTheme()" class="material-symbols-outlined">
+        sunny
+      </span>
       <select [(ngModel)]="selectedLanguage" (change)="changeLanguage(selectedLanguage)">
         <option value="en">EN</option>
         <option value="sr">SR</option>
