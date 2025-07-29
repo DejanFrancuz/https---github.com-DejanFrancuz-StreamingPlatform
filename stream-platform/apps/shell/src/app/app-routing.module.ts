@@ -9,7 +9,7 @@ export const appRoutes: Route[] = [
     // children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
-        path: 'auth', 
+        path: 'auth',
         loadChildren: () => import('auth/Module').then((m) => m.AuthModule),
       },
       {
@@ -19,6 +19,10 @@ export const appRoutes: Route[] = [
       {
         path: 'users',
         loadChildren: () => import('users/Module').then((m) => m.UsersModule),
+      },
+      {
+        path: 'movies',
+        loadChildren: () => import('movies/Module').then((m) => m.MoviesModule),
       },
     // ],
   // },

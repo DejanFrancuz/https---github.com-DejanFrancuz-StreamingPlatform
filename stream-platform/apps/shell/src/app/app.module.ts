@@ -11,11 +11,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthDataAccessModule } from '@stream-platform/auth-data-access';
+import { MoviesDataAccessModule } from '@stream-platform/movies-data-access';
 
 @NgModule({
   declarations: [AppComponent, ShellLayoutComponent],
   exports: [ShellLayoutComponent],
-  imports: [BrowserModule, AppRoutingModule, MatProgressSpinnerModule, CommonSharedUiModule,StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), AuthDataAccessModule, UsersDataAccessModule],
+  imports: [BrowserModule, AppRoutingModule, MatProgressSpinnerModule, CommonSharedUiModule,StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), AuthDataAccessModule, UsersDataAccessModule, MoviesDataAccessModule],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     {

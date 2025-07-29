@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { UserFacade } from '@stream-platform/users-data-access'
-import { User } from 'libs/users/data-access/src/lib/models/User';
+import { Component, OnInit } from '@angular/core';
+import { UserFacade, User } from '@stream-platform/users-data-access'
 
 @Component({
   selector: 'app-users-list',
@@ -9,7 +7,7 @@ import { User } from 'libs/users/data-access/src/lib/models/User';
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
 })
-export class UsersListComponent {
+export class UsersListComponent implements OnInit {
 
   users: User[] | null = [];
   authorities: string[] | null = [];

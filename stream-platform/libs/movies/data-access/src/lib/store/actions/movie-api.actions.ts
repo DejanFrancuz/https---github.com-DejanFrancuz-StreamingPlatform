@@ -1,0 +1,17 @@
+import { createAction, props } from '@ngrx/store';
+import { MovieItem } from '../../models/Movie';
+
+export const getMoviesSuccess = createAction('[Movie/API] Get Movies Success', props<{ moviesList: MovieItem[]}>());
+export const getMoviesFail = createAction('[Movie/API] Get Movies Fail', props<{ error: string}>());
+
+export const getMovieByIdSuccess = createAction('[Movie/API] Get Movie by Id Success', props<{ movie: MovieItem }>);
+export const getMovieByIdFail = createAction('[Movie/API] Get Movie by Id Fail', props<{ error: string}>());
+
+export const updateMovieSuccess = createAction('[Movie/API] Update Movie Success');
+export const updateMovieFail = createAction('[Movie/API] Update Movie Fail', props<{ error: string}>());
+
+export const addMovieSuccess = createAction('[Movie/API] Add Movie Success');
+export const addMovieFail = createAction('[Movie/API] Add Movie Fail', props<{ error: string}>());
+
+export const deleteMovieSuccess = createAction('[Movie/API] Delete Movie Success');
+export const deleteMovieFail = createAction('[Movie/API] Delete Movie Fail', props<{ error: string}>());

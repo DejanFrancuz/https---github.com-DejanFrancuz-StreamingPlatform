@@ -10,6 +10,8 @@ module.exports = {
       colors: {
         primary: 'var(--color-primary)',
         accent: 'var(--color-accent)',
+        surface: 'var(--color-surface)',
+        text: 'var(--color-text)',
       },
       spacing: {
         xxs: 'var(--sp-xxs)',
@@ -20,7 +22,7 @@ module.exports = {
       },
       minHeight: {
         'screen-toolbar': 'calc(100vh - var(--toolbar-height))',
-      }
+      },
     },
   },
   plugins: [],

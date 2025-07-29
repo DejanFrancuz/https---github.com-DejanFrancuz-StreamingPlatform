@@ -6,7 +6,7 @@
   --color-surface: var(--color-surface);
   --color-text: var(--color-text);
 
-  --toolbar-height: 64px;
+  --toolbar-height: 100px;
 
   --btn-padding-x: var(--sp-sm);
   --btn-padding-y: var(--sp-xs);

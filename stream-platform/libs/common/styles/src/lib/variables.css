@@ -29,7 +29,7 @@
   --color-btn-success: #1abb38;
   --color-btn-text: #ffffff;
 
-    --toolbar-height: 64px;
+  --toolbar-height: 80px;
 
   --btn-padding-x: var(--sp-sm);
   --btn-padding-y: var(--sp-xs);
