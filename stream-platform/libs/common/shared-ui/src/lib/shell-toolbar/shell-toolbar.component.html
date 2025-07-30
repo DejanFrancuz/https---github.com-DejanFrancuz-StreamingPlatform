@@ -1,13 +1,35 @@
-
-<header class="flex h-[--toolbar-height] justify-between items-center bg-primary color-surface py-sm px-lg">
-    <div class="text-2xl font-bold">StreamPlatform</div>
-    <div class="flex items-center gap-sm">
-      <span (click)="toggleTheme()" class="material-symbols-outlined">
-        sunny
-      </span>
-      <select class="bg-surface color-text border-primary border-2 rounded p-xs " [(ngModel)]="selectedLanguage" (change)="changeLanguage(selectedLanguage)">
+<header
+  class="flex h-[--toolbar-height] justify-between items-center bg-primary color-surface py-sm px-lg"
+>
+  <div class="text-2xl font-bold">StreamPlatform</div>
+  <div class="flex items-center gap-sm">
+    <span class="material-symbols-outlined">search</span>
+    <span (click)="toggleTheme()" class="material-symbols-outlined">
+      sunny
+    </span>
+    <!-- <select class="bg-surface color-text border-primary border-2 rounded p-xs " [(ngModel)]="selectedLanguage" (change)="changeLanguage(selectedLanguage)">
         <option value="en">EN</option>
         <option value="sr">SR</option>
-      </select>
+      </select> -->
+    <div
+      class="flex flex-col gap-2 overflow-hidden"
+      *ngIf="person$ | async as person"
+    >
+      <ngx-avatars
+        class="cursor-pointer"
+        value="{{ person.username.charAt(0).toUpperCase() }}"
+        (clickOnAvatar)="toggleAvatar()"
+        borderColor="#87BBA2"
+        fgColor="#87BBA2"
+        bgColor="#5D737E"
+        size="35"
+      ></ngx-avatars>
+      <div>
+        <lib-person-dropdown
+          *ngIf="isOpen"
+          (closeDropdown)="closeDropdown()"
+        ></lib-person-dropdown>
+      </div>
     </div>
-  </header>
+  </div>
+</header>

@@ -10,7 +10,7 @@
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/movies",
+        "outputPath": "dist/movies",
         "index": "apps/movies/src/index.html",
         "main": "apps/movies/src/app/movies.module.ts",
         "polyfills": ["zone.js"],

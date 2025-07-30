@@ -29,4 +29,8 @@ export class AuthFacade {
   login(loginForm: LoginForm){
     this.store.dispatch(AuthActions.login({loginForm: loginForm}));
   }
+
+  logout(){
+    this.store.dispatch(AuthActions.logout());
+  }
 }

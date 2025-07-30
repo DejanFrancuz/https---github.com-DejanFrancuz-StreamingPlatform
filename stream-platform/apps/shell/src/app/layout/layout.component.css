@@ -1,24 +1,13 @@
-lib-shell-toolbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--toolbar-height);
-  z-index: 1000;
-  background-color: var(--color-surface);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .shell-container {
   display: flex;
   flex-direction: column;
-  padding-top: var(--toolbar-height);
+  /* padding-top: var(--toolbar-height); */
   background-color: var(--color-background);
-  min-height: calc(70vh - var(--toolbar-height));
+  min-height: calc(70vh - var(--toolbar-height) - - var(--navbar-height));
 }
 
 .shell-content {
-  flex: 1;
+  /* flex: 1; */
   padding: var(--sp-md);
   color: var(--color-accent);
   display: flex;

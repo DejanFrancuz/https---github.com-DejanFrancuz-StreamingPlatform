@@ -1,7 +1,10 @@
 <div>
-  <ul>
+  <ul class="grid grid-cols-4 gap-6">
     <li *ngFor="let movie of movies" >
-      {{ movie.title }}
+      <app-movies-item
+      [movieItem] = movie
+      >
+      </app-movies-item>
     </li>
   </ul>
 </div>

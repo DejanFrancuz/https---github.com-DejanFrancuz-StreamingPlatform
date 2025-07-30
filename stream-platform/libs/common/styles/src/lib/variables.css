@@ -1,8 +1,8 @@
 :root {
   /* Colors */
-  --color-primary: #000000;
+  --color-primary: #15181c;
   --color-accent: #FFF07C;
-  --color-background: #F0F7EE;
+  --color-background: #14181C;
   --color-surface: #5D737E;
   --color-text: #87BBA2;
 
@@ -30,6 +30,7 @@
   --color-btn-text: #ffffff;
 
   --toolbar-height: 80px;
+  --navbar-height: 20px;
 
   --btn-padding-x: var(--sp-sm);
   --btn-padding-y: var(--sp-xs);
@@ -43,5 +44,5 @@
   --color-accent: #ff5c8d;
   --color-background: #121212;
   --color-surface: #1E1E1E;
-  --color-text: #E0E0E0;
+  --color-text: #FFF07C;
 }
