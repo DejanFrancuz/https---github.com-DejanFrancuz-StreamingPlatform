@@ -1,5 +1,6 @@
-<div
-  class="flex flex-col bg-[var(--color-surface)] justify-center items-center w-36 h-60 shadow-md rounded-md"
+<div *ngIf="movieItem"
+  class="flex flex-col bg-[var(--color-surface)] justify-center items-center w-36 h-60 shadow-md rounded-md
+  transition-transform duration-300 transform hover:scale-105"
 >
   <div class="relative mt-0 w-36 h-48 group">
     <img
@@ -12,17 +13,18 @@
     class="absolute bottom-0 left-0 right-0 bg-black/60 w-full flex flex-row justify-between items-center py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
   >
     <span class="material-symbols-outlined text-sm cursor-pointer">favorite</span>
-    <span class="material-symbols-outlined text-sm cursor-pointer">visibility</span>
-    <span class="material-symbols-outlined text-sm cursor-pointer">shopping_cart</span>
+    <button (click)="onViewMovie()" class="material-symbols-outlined text-sm cursor-pointer">visibility</button>
+    <button (click)="onBuyMovie()"
+    class="material-symbols-outlined text-sm cursor-pointer">shopping_cart</button>
   </div>
   </div>
 
-  <span #titleRef class="truncate max-w-32 text-sm p-2" [matTooltip]="movieItem.title"
+  <span #titleRef class="truncate max-w-32 text-sm p-2 cursor-default" [matTooltip]="movieItem.title"
   matTooltipShowDelay="500" [matTooltipDisabled]=" !isTextOverflowing(titleRef)"
   >
     {{ movieItem.title }}</span
   >
-  <span class="text-xs italic pb-1">
+  <span class="text-xs italic pb-1 cursor-default">
      ({{ movieItem.year }})
   </span>
 </div>

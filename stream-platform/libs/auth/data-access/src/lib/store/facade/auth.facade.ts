@@ -27,6 +27,7 @@ export class AuthFacade {
   }
 
   login(loginForm: LoginForm){
+    console.log("cekaj druze " + loginForm.email);
     this.store.dispatch(AuthActions.login({loginForm: loginForm}));
   }
 

@@ -1,0 +1,15 @@
+<div *ngIf="movie$ | async as movie">
+  <div class="flex flex-row justify-between w-full">
+    <div class="flex flex-col gap-8 p-8">
+  <span class="text-2xl font-bold"> {{ movie.title }}</span>
+  <span> {{ movie.description }}</span>
+  </div>
+  <div class="relative mt-0 w-72 h-96">
+    <img
+      [src]="'http://localhost:8080/' + movie.posterUrl"
+      alt="Poster"
+      class="w-full h-full object-cover rounded-t-md"
+    />
+  </div>
+  </div>
+</div>

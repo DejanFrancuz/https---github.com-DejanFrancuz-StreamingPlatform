@@ -6,19 +6,52 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MovieActionsApi } from '../actions/movie-index.actions';
 import { Router } from '@angular/router';
+import { getMovieById } from '../actions/movie.actions';
 
 @Injectable()
 export class MovieEffects {
   getMovies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MovieActions.getMovies),
-      switchMap(() =>
-        this.movieService.getMovies().pipe(
+      switchMap((action) =>
+        this.movieService.getMovies(action.pageQuery).pipe(
           map(movies =>
             MovieActionsApi.getMoviesSuccess({ moviesList: movies })
         ),
           catchError(error => {
             return of(MovieActionsApi.getMoviesFail({ error }))
+        })
+        )
+      )
+    )
+  );
+
+  getMyMovies$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MovieActions.getMyMovies),
+      switchMap((action) =>
+        this.movieService.getMyMovies(action.pageQuery).pipe(
+          map(movies =>
+            MovieActionsApi.getMyMoviesSuccess({ moviesList: movies })
+        ),
+          catchError(error => {
+            return of(MovieActionsApi.getMoviesFail({ error }))
+        })
+        )
+      )
+    )
+  );
+
+  getMovieById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MovieActions.getMovieById),
+      switchMap((action) =>
+        this.movieService.getMovieById(action.movieId).pipe(
+          map(movie =>
+            MovieActionsApi.getMovieByIdSuccess({ movie })
+        ),
+          catchError(error => {
+            return of(MovieActionsApi.getMovieByIdFail({ error }))
         })
         )
       )
@@ -35,6 +68,22 @@ export class MovieEffects {
         ),
           catchError(error => {
             return of(MovieActionsApi.addMovieFail({ error }))
+        })
+        )
+      )
+    )
+  );
+
+  addMovieForPerson$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MovieActions.addMovieForPerson),
+      switchMap((action) =>
+        this.movieService.addMovieForPerson(action.movieId).pipe(
+          map(() =>
+            MovieActionsApi.addMovieForPersonSuccess()
+        ),
+          catchError(error => {
+            return of(MovieActionsApi.addMovieForPersonFail({ error }))
         })
         )
       )

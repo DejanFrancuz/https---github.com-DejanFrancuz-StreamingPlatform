@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MovieItem } from '../models/Movie';
+import { PageEntity, PageQuery } from '@stream-platform/types';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +10,33 @@ import { MovieItem } from '../models/Movie';
 export class MovieService {
   constructor(private httpClient: HttpClient) {}
 
-  getMovies(): Observable<MovieItem[]> {
-    return this.httpClient.get<MovieItem[]>('http://localhost:8080/api/movies/all');
+  getMovies(query: PageQuery): Observable<PageEntity<MovieItem>> {
+    const params = new HttpParams({ fromObject: {
+    page: query.page.toString(),
+    size: query.size.toString(),
+    // ...(query.sort ? { sort: query.sort } : {})
+  }});
+    return this.httpClient.get<PageEntity<MovieItem>>('http://localhost:8080/api/movies/all', { params });
   }
+
+  getMyMovies(query: PageQuery): Observable<PageEntity<MovieItem>>{
+    const params = new HttpParams({ fromObject: {
+    page: query.page.toString(),
+    size: query.size.toString(),
+    // ...(query.sort ? { sort: query.sort } : {})
+  }});
+    return this.httpClient.get<PageEntity<MovieItem>>('http://localhost:8080/api/movies/my', { params });
+  }
+
   addMovie(movie: MovieItem): Observable<any> {
     return this.httpClient
       .post<any>('http://localhost:8080/api/movies/add', movie);
   }
-  getMoiveById(id: number): Observable<MovieItem> {
+  addMovieForPerson(movieId: number): Observable<any> {
+    return this.httpClient
+      .post<any>('http://localhost:8080/api/movies/add-movie-for-person', movieId);
+  }
+  getMovieById(id: number): Observable<MovieItem> {
     return this.httpClient.get<MovieItem>('http://localhost:8080/api/movies/get-one', {
       params: { movieId: id },
     });

@@ -13,12 +13,12 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(action =>
-        this.authService.login({ username: action.loginForm.username, password: action.loginForm.password }).pipe(
+        this.authService.login({ email: action.loginForm.email, password: action.loginForm.password }).pipe(
           map(personData => {
             this.router.navigate(['/dashboard']);
             return AuthActionsApi.loginSuccess({ personData })
         }),
-          catchError(error => { 
+          catchError(error => {
             this.router.navigate(['/auth/login']);
             return of(AuthActionsApi.loginFailure({ error }))
         })

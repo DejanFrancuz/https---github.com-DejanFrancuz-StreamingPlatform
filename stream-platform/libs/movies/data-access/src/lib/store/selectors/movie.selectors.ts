@@ -5,10 +5,20 @@ import {  MOVIE_FEATURE_KEY, MovieState } from '../reducers/movie.reducer';
 export const selectMovieState =
   createFeatureSelector<MovieState>(MOVIE_FEATURE_KEY);
 
-export const selectgetMovies = createSelector(
+export const selectAllMovies = createSelector(
   selectMovieState,
   (state: MovieState) => state.moviesList
 );
+
+export const selectMyMovies = createSelector(
+  selectMovieState,
+  (state: MovieState) => state.myMoviesResult
+);
+
+export const selectSelectedMovie = createSelector(
+  selectMovieState,
+  (state: MovieState) => state.selectedMovie
+)
 
 export const selectMoviesLoaded = createSelector(
   selectMovieState,
