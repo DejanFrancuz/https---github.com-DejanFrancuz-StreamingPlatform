@@ -41,8 +41,8 @@ export class MyMoviesListComponent {
     this.pagequery = query;
   }
 
-    buyMovieForPerson(movieId: number){
-      this.router.navigateByUrl(`movies/${movieId}/payment`);
+    buyMovieForPerson(movie: MovieItem){
+      // this.router.navigateByUrl(`movies/${movieId}/payment`);
       // this.moviesFacade.addMovieForPerson(movieId);
     }
 

@@ -14,6 +14,8 @@ export const updateMovie = createAction('[Movie] Update Movie',  props<{ movie: 
 
 export const addMovie = createAction('[Movie] Add Movie',  props<{ movie: MovieItem }>());
 
+export const addMovieToCart = createAction('[Movie] Add Movie To Cart',  props<{ movie: MovieItem }>());
+
 export const addMovieForPerson = createAction('[Movie] Add Movie For Person',  props<{ movieId: number }>());
 
 export const deleteMovie = createAction('[Movie] Delete Movie',  props<{ movieId: number }>());

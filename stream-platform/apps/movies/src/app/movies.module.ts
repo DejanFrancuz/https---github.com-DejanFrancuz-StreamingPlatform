@@ -11,10 +11,12 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatMenuModule } from '@angular/material/menu';
 import { MyMoviesListComponent } from './movies/my-movies-list/my-movies-list.component';
 import { MovieViewComponent } from './movies/movie-view/movie-view.component'
+import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MoviesListComponent, MoviesItemComponent, MoviesPaymentComponent, MyMoviesListComponent, MovieViewComponent],
-  imports: [CommonModule, RouterModule.forChild(appRoutes), MatTooltipModule, MatTabsModule, MatPaginatorModule, MatMenuModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, CommonSharedUiModule, RouterModule.forChild(appRoutes), MatTooltipModule, MatTabsModule, MatPaginatorModule, MatMenuModule],
   providers: [],
   exports: [MoviesListComponent],
 })

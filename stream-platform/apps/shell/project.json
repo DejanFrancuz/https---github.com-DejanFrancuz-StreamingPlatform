@@ -24,7 +24,8 @@
         ],
         "styles": [
           "node_modules/tailwindcss/tailwind.css",
-          "libs/common/styles/src/lib/index.css"
+          "libs/common/styles/src/lib/index.css",
+          "node_modules/ngx-toastr/toastr.css"
         ],
         "scripts": [],
         "customWebpackConfig": {

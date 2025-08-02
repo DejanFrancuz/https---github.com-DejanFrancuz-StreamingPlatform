@@ -17,6 +17,8 @@ export class MovieFacade {
   selectLoaded$ = this.store.pipe(select(MovieSelectors.selectMoviesLoaded));
   selectMovies$ = this.store.pipe(select(MovieSelectors.selectAllMovies));
   selectMyMovies$ = this.store.pipe(select(MovieSelectors.selectMyMovies));
+  selectCartMovies$ = this.store.pipe(select(MovieSelectors.selectCartMovies));
+  selectCartMoviesLenght$ = this.store.pipe(select(MovieSelectors.selectCartMoviesLenght));
   selectMovie$ = this.store.pipe(select(MovieSelectors.selectSelectedMovie));
 
   /**
@@ -40,6 +42,10 @@ export class MovieFacade {
 
   addMovieForPerson(movieId: number){
     this.store.dispatch(MovieActions.addMovieForPerson({ movieId }));
+  }
+
+  addCartMovie(movie: MovieItem){
+    this.store.dispatch(MovieActions.addMovieToCart({ movie }))
   }
 
   updateMovie(movie: MovieItem){

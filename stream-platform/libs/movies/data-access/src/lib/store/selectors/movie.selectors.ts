@@ -15,6 +15,16 @@ export const selectMyMovies = createSelector(
   (state: MovieState) => state.myMoviesResult
 );
 
+export const selectCartMovies = createSelector(
+  selectMovieState,
+  (state: MovieState) => state.cartMovies
+);
+
+export const selectCartMoviesLenght = createSelector(
+  selectMovieState,
+  (state: MovieState) => state.cartMovies.length
+);
+
 export const selectSelectedMovie = createSelector(
   selectMovieState,
   (state: MovieState) => state.selectedMovie

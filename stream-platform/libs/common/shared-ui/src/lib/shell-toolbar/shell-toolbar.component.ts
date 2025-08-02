@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Person } from 'libs/auth/data-access/src/lib/models/Person';
 import { trigger, style, transition, animate } from '@angular/animations';
+import { MovieFacade } from '@stream-platform/movies-data-access';
 
 @Component({
   selector: 'lib-shell-toolbar',
@@ -16,11 +17,13 @@ export class ShellToolbarComponent{
   selectedLanguage = 'en';
 
   person$: Observable<Person | null>;
+  cartCount$: Observable<number | null>
 
   isOpen = false;
 
-  constructor(private authFacade: AuthFacade) {
+  constructor(private authFacade: AuthFacade, private moviesFacade: MovieFacade) {
     this.person$ = this.authFacade.selectedAuthPerson$
+    this.cartCount$ = this.moviesFacade.selectCartMoviesLenght$
   }
 
   toggleAvatar(){

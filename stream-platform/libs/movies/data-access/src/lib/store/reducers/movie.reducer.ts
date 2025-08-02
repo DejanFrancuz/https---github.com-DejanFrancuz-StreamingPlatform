@@ -9,6 +9,7 @@ export interface MovieState {
   // moviesList: MovieItem[] | null;
   moviesList: PageEntity<MovieItem>
   myMoviesResult: PageEntity<MovieItem>;
+  cartMovies: MovieItem[];
   selectedMovie: MovieItem | null;
   loading: boolean;
   error: string | null;
@@ -27,6 +28,7 @@ export const initialState: MovieState = {
     totalElements: 0,
     last: true,
   },
+  cartMovies: [],
   selectedMovie: null,
   loading: false,
   error: null,
@@ -43,5 +45,6 @@ export const userReducer = createReducer(
     ({ ...state, selectedMovie: action.movie, loading: false })),
   on(MovieActionsApi.getMoviesFail, (state, action) => ({ ...state, error: action.error, loading: false })),
   on(MovieActionsApi.getMyMoviesFail, (state, action) => ({ ...state, error: action.error, loading: false })),
+  on(MovieActions.addMovieToCart, (state, action) => ({...state, cartMovies: [...state.cartMovies, action.movie]})),
 );
 

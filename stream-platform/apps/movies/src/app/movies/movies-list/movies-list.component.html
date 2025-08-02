@@ -87,6 +87,7 @@
       <li *ngFor="let movie of myMovies.content">
         <app-movies-item
           [movieItem]="movie"
+          (viewMovie)="viewMovie($event)"
           (buyMovie)="buyMovieForPerson($event)"
         >
         </app-movies-item>

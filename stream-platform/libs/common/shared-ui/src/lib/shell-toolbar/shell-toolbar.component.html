@@ -11,6 +11,15 @@
         <option value="en">EN</option>
         <option value="sr">SR</option>
       </select> -->
+    <span class="material-symbols-outlined relative cursor-pointer"
+      >shopping_cart
+      <span
+        *ngIf="cartCount$ | async as count"
+        class="absolute -top-4 -right-4 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex justify-center"
+      >
+        {{ count }}
+      </span>
+    </span>
     <div
       class="flex flex-col gap-2 overflow-hidden"
       *ngIf="person$ | async as person"

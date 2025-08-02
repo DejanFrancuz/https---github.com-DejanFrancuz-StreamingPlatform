@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { MovieActionsApi } from '../actions/movie-index.actions';
 import { Router } from '@angular/router';
 import { getMovieById } from '../actions/movie.actions';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class MovieEffects {
@@ -19,6 +20,7 @@ export class MovieEffects {
             MovieActionsApi.getMoviesSuccess({ moviesList: movies })
         ),
           catchError(error => {
+            this.toastrService.error("Get All Movies failed. \n ", error)
             return of(MovieActionsApi.getMoviesFail({ error }))
         })
         )
@@ -35,6 +37,7 @@ export class MovieEffects {
             MovieActionsApi.getMyMoviesSuccess({ moviesList: movies })
         ),
           catchError(error => {
+            this.toastrService.error("Get My Movies failed. \n ", error)
             return of(MovieActionsApi.getMoviesFail({ error }))
         })
         )
@@ -51,6 +54,7 @@ export class MovieEffects {
             MovieActionsApi.getMovieByIdSuccess({ movie })
         ),
           catchError(error => {
+            this.toastrService.error("Get Movie by Id failed. \n ", error)
             return of(MovieActionsApi.getMovieByIdFail({ error }))
         })
         )
@@ -63,10 +67,14 @@ export class MovieEffects {
       ofType(MovieActions.addMovie),
       switchMap((action) =>
         this.movieService.addMovie(action.movie).pipe(
-          map(() =>
-            MovieActionsApi.addMovieSuccess()
+          map(() => {
+            this.toastrService.success("Movie added successfully.");
+           return  MovieActionsApi.addMovieSuccess()
+
+          }
         ),
           catchError(error => {
+            this.toastrService.error("Add Movie failed. \n ", error)
             return of(MovieActionsApi.addMovieFail({ error }))
         })
         )
@@ -79,10 +87,13 @@ export class MovieEffects {
       ofType(MovieActions.addMovieForPerson),
       switchMap((action) =>
         this.movieService.addMovieForPerson(action.movieId).pipe(
-          map(() =>
-            MovieActionsApi.addMovieForPersonSuccess()
+          map(() => {
+            this.toastrService.success("Movie for Person added successfully.");
+            return MovieActionsApi.addMovieForPersonSuccess()
+          }
         ),
           catchError(error => {
+            this.toastrService.error("Add Movie for Person failed. \n ", error)
             return of(MovieActionsApi.addMovieForPersonFail({ error }))
         })
         )
@@ -95,10 +106,13 @@ export class MovieEffects {
       ofType(MovieActions.updateMovie),
       switchMap((action) =>
         this.movieService.updateMovie(action.movie).pipe(
-          map(() =>
-            MovieActionsApi.updateMovieSuccess()
+          map(() =>{
+            this.toastrService.success("Movie updated successfully")
+            return MovieActionsApi.updateMovieSuccess()
+          }
         ),
           catchError(error => {
+            this.toastrService.error("Movie update failed. \n ", error)
             return of(MovieActionsApi.updateMovieFail({ error }))
         })
         )
@@ -111,10 +125,14 @@ export class MovieEffects {
       ofType(MovieActions.deleteMovie),
       switchMap((action) =>
         this.movieService.deleteMovie(action.movieId).pipe(
-          map(() =>
-            MovieActionsApi.deleteMovieSuccess()
+          map(() => {
+            this.toastrService.success("Movie deleted successfully")
+            return MovieActionsApi.deleteMovieSuccess()
+
+          }
         ),
           catchError(error => {
+            this.toastrService.error("Movie delete failed. \n ", error)
             return of(MovieActionsApi.deleteMovieFail({ error }))
         })
         )
@@ -122,5 +140,5 @@ export class MovieEffects {
     )
   );
 
-  constructor(private actions$: Actions, private movieService: MovieService, private router: Router) {}
+  constructor(private actions$: Actions, private movieService: MovieService, private toastrService: ToastrService, private router: Router) {}
 }

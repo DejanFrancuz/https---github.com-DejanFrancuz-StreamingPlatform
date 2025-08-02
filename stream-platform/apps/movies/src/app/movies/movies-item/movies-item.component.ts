@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MovieItem } from '@stream-platform/movies-data-access';
 
+
 @Component({
   selector: 'app-movies-item',
   standalone: false,
@@ -13,14 +14,13 @@ export class MoviesItemComponent {
   movieItem!: MovieItem;
 
   @Output()
-  buyMovie = new EventEmitter<number>();
+  buyMovie = new EventEmitter<MovieItem>();
 
   @Output()
   viewMovie = new EventEmitter<number>();
 
   onBuyMovie(){
-    console.log("ee?");
-    this.buyMovie.emit(this.movieItem.movieId);
+    this.buyMovie.emit(this.movieItem);
   }
 
   onViewMovie(){
