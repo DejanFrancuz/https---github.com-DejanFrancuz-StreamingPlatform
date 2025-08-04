@@ -10,13 +10,13 @@ export class UiButtonComponent {
   @Input() variant: 'primary' | 'danger' | 'success' = 'primary';
   @Input() disabled = false;
 
-   @Output() click = new EventEmitter<Event>();
+   @Output() buttonPressed = new EventEmitter<Event>();
 
   handleClick(event: Event) {
     console.log("handle ui button");
     if (!this.disabled) {
       console.log("handle ui button prosooo");
-      this.click.emit(event);
+      this.buttonPressed.emit(event);
     }
   }
 }

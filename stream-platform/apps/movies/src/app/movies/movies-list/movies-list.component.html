@@ -64,8 +64,10 @@
       <li *ngFor="let movie of movies.content">
         <app-movies-item
           [movieItem]="movie"
+          [isAdmin]="isAdmin"
           (buyMovie)="buyMovieForPerson($event)"
           (viewMovie)="viewMovie($event)"
+          (deleteMovie)="deleteMovie($event)"
         >
         </app-movies-item>
       </li>
@@ -87,8 +89,9 @@
       <li *ngFor="let movie of myMovies.content">
         <app-movies-item
           [movieItem]="movie"
+          [isMyPage]="true"
           (viewMovie)="viewMovie($event)"
-          (buyMovie)="buyMovieForPerson($event)"
+          (watchMovie)="watchMovie($event)"
         >
         </app-movies-item>
       </li>

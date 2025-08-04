@@ -71,11 +71,15 @@ export class MovieViewComponent implements OnInit, OnDestroy {
 
   onBuy() {
     this.moviesFacade.addMovieForPerson(this.movieId);
-      this.router.navigateByUrl('movies');
+    this.router.navigateByUrl('movies');
   }
 
   onCart() {
     if (this.movie) this.movieFacade.addCartMovie(this.movie);
+  }
+
+  onDelete(){
+    this.movieFacade.deleteMovie(this.movieId);
   }
 
   onUpdate() {

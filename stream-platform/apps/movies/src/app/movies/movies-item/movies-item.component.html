@@ -14,8 +14,15 @@
   >
     <span class="material-symbols-outlined text-sm cursor-pointer">favorite</span>
     <button (click)="onViewMovie()" class="material-symbols-outlined text-sm cursor-pointer">visibility</button>
-    <button (click)="onBuyMovie()"
-    class="material-symbols-outlined text-sm cursor-pointer">shopping_cart</button>
+    <button *ngIf="!isMyPage; else watchAction"  (click)="isAdmin ? onDeleteMovie() : onBuyMovie()"
+    class="material-symbols-outlined text-sm cursor-pointer">{{isAdmin ? 'delete' : 'shopping_cart' }}</button>
+
+    <ng-template #watchAction>
+        <button (click)="onWatchMovie()"
+    class="material-symbols-outlined text-sm cursor-pointer">play_circle</button>
+
+
+    </ng-template>
   </div>
   </div>
 

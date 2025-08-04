@@ -45,6 +45,13 @@ export const userReducer = createReducer(
     ({ ...state, selectedMovie: action.movie, loading: false })),
   on(MovieActionsApi.getMoviesFail, (state, action) => ({ ...state, error: action.error, loading: false })),
   on(MovieActionsApi.getMyMoviesFail, (state, action) => ({ ...state, error: action.error, loading: false })),
-  on(MovieActions.addMovieToCart, (state, action) => ({...state, cartMovies: [...state.cartMovies, action.movie]})),
+  on(MovieActions.addMovieToCart, (state, action) => {
+    const movieExist = state.cartMovies.some((movie) => movie.movieId === action.movie.movieId)
+
+    const newCart = movieExist ? state.cartMovies.filter( movie => movie.movieId !== action.movie.movieId )
+    : [...state.cartMovies, action.movie]
+    return {...state, cartMovies: newCart}
+  }
+  ),
 );
 

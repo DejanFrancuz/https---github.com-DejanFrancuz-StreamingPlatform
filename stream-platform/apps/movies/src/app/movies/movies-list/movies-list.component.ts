@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { AuthFacade, Person } from '@stream-platform/auth-data-access';
 import { MovieFacade, MovieItem } from '@stream-platform/movies-data-access';
 import { PageEntity, PageQuery } from '@stream-platform/types';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-movies-list',
@@ -11,11 +12,16 @@ import { Observable } from 'rxjs';
   templateUrl: './movies-list.component.html',
   styleUrl: './movies-list.component.css'
 })
-export class MoviesListComponent  {
+export class MoviesListComponent implements OnInit, OnDestroy {
 
   movies$: Observable<PageEntity<MovieItem>>;
 
   myMovies$: Observable<PageEntity<MovieItem>>;
+
+  person!: Person | null;
+
+    private unsubscribe$ = new Subject<void>();
+
 
   selectedTabIndex = 0;
 
@@ -25,9 +31,9 @@ export class MoviesListComponent  {
   };
 
   genres = ["Drama", "Comedy", "War", "Romantic Drama"];
-  dates = ["50s", "60s", "70s", "80s", "90s", "00s", "10s", "20s"];
+  dates = ["1950s", "1960s", "1970s", "1980s", "1990s", "2000s", "2010s", "2020s"];
 
-  constructor(private moviesFacade: MovieFacade, private router: Router) {
+  constructor(private moviesFacade: MovieFacade, private router: Router, private authFacade: AuthFacade) {
 
     this.moviesFacade.getMyMovies(this.pagequery);
 
@@ -37,17 +43,25 @@ export class MoviesListComponent  {
     this.movies$ = this.moviesFacade.selectMovies$;
   }
 
+  ngOnInit(): void {
+    this.authFacade.selectedAuthPerson$
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe((data) => {
+      this.person = data;
+    });
+  }
+
   onPageChange(event: PageEvent) {
-  const query: PageQuery = {
-    page: event.pageIndex,
-    size: event.pageSize,
-  };
+    const query: PageQuery = {
+      page: event.pageIndex,
+      size: event.pageSize,
+    };
 
-  if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(query)
-  else this.moviesFacade.getMyMovies(query);
+    if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(query)
+      else this.moviesFacade.getMyMovies(query);
 
-  this.pagequery = query;
-}
+    this.pagequery = query;
+  }
 
   buyMovieForPerson(movie: MovieItem){
     // this.router.navigateByUrl(`movies/payment/${movieId}`);
@@ -58,10 +72,27 @@ export class MoviesListComponent  {
     this.router.navigateByUrl(`movies/view-movie/${movieId}`);
   }
 
+  deleteMovie(movieId: number){
+    this.moviesFacade.deleteMovie(movieId);
+  }
+
+  watchMovie(movieId: number){
+    this.router.navigateByUrl(`movies/watch-movie/${movieId}`);
+  }
+
   filterByGenre(genre: string){
     console.log(genre);
   }
   filterByDate(date: string){
     console.log(date);
+  }
+
+  get isAdmin(): boolean {
+    return this.person?.permissions.includes('ADMIN') || false;
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

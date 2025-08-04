@@ -13,9 +13,10 @@ import { MyMoviesListComponent } from './movies/my-movies-list/my-movies-list.co
 import { MovieViewComponent } from './movies/movie-view/movie-view.component'
 import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MovieWatchComponent } from './movies/movie-watch/movie-watch.component';
 
 @NgModule({
-  declarations: [MoviesListComponent, MoviesItemComponent, MoviesPaymentComponent, MyMoviesListComponent, MovieViewComponent],
+  declarations: [MoviesListComponent, MoviesItemComponent, MoviesPaymentComponent, MyMoviesListComponent, MovieViewComponent, MovieWatchComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, CommonSharedUiModule, RouterModule.forChild(appRoutes), MatTooltipModule, MatTabsModule, MatPaginatorModule, MatMenuModule],
   providers: [],
   exports: [MoviesListComponent],

@@ -13,11 +13,23 @@ export class MoviesItemComponent {
   @Input()
   movieItem!: MovieItem;
 
+  @Input()
+  isAdmin = false;
+
+  @Input()
+  isMyPage = false;
+
   @Output()
   buyMovie = new EventEmitter<MovieItem>();
 
   @Output()
   viewMovie = new EventEmitter<number>();
+
+  @Output()
+  deleteMovie = new EventEmitter<number>();
+
+  @Output()
+  watchMovie = new EventEmitter<number>();
 
   onBuyMovie(){
     this.buyMovie.emit(this.movieItem);
@@ -25,6 +37,14 @@ export class MoviesItemComponent {
 
   onViewMovie(){
     this.viewMovie.emit(this.movieItem.movieId);
+  }
+
+  onDeleteMovie(){
+    this.deleteMovie.emit(this.movieItem.movieId);
+  }
+
+  onWatchMovie(){
+    this.watchMovie.emit(this.movieItem.movieId);
   }
 
   isTextOverflowing(element: HTMLElement): boolean {

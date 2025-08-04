@@ -48,22 +48,21 @@
   <div  class="flex flex-row items-center justify-between py-32">
     <stream-platform-ui-button
         variant="danger"
-        (click)="onBack()"
+        (buttonPressed)="onBack()"
       >
         Back
       </stream-platform-ui-button>
 
       <div class="flex gap-4">
       <stream-platform-ui-button
-        *ngIf="isAdmin"
-        variant="primary"
-        (click)="onCart()"
+        variant="danger"
+        (buttonPressed)="isAdmin ? onDelete() : onCart()"
       >
-        Add to Cart
+        {{ isAdmin ? 'Delete' : 'Add to Cart' }}
       </stream-platform-ui-button>
     <stream-platform-ui-button
         variant="primary"
-        (click)="isAdmin ? onUpdate() : onBuy()"
+        (buttonPressed)="isAdmin ? onUpdate() : onBuy()"
       >
         {{ person?.permissions?.includes("ADMIN") ? "Edit" : "Buy"}}
       </stream-platform-ui-button>
