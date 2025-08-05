@@ -15,7 +15,8 @@ export class UserFacade {
    * and expose them as observables through the facade.
    */
   selectLoaded$ = this.store.pipe(select(UserSelectors.selectUsersLoaded));
-  selectUsers$ = this.store.pipe(select(UserSelectors.selectgetUsers));
+  selectUsers$ = this.store.pipe(select(UserSelectors.selectGetUsers));
+  selectSelectedUser$ = this.store.pipe(select(UserSelectors.selectSelectedUser));
 
   /**
    * Use the initialization action to perform one
@@ -23,6 +24,10 @@ export class UserFacade {
    */
   getUsers(){
     this.store.dispatch(UserActions.getUsers());
+  }
+
+  getUserById(userId: number){
+    this.store.dispatch(UserActions.getUserById({ userId }));
   }
 
   addUser(user: User){

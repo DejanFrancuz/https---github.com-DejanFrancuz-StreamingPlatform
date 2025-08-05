@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Person } from 'libs/auth/data-access/src/lib/models/Person';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { MovieFacade } from '@stream-platform/movies-data-access';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lib-shell-toolbar',
@@ -21,7 +22,7 @@ export class ShellToolbarComponent{
 
   isOpen = false;
 
-  constructor(private authFacade: AuthFacade, private moviesFacade: MovieFacade) {
+  constructor(private authFacade: AuthFacade, private moviesFacade: MovieFacade, private router: Router) {
     this.person$ = this.authFacade.selectedAuthPerson$
     this.cartCount$ = this.moviesFacade.selectCartMoviesLenght$
   }
@@ -37,6 +38,11 @@ export class ShellToolbarComponent{
   toggleTheme() {
     this.dark = !this.dark;
     document.body.classList.toggle('dark-theme', this.dark);
+  }
+
+  onProfile(userId: number){
+    this.router.navigateByUrl(`users/edit/${userId}`);
+    this.isOpen = false;
   }
 
   changeLanguage(lang: string) {

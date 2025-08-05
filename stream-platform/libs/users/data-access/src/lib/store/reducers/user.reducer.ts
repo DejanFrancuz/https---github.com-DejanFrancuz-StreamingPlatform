@@ -21,8 +21,10 @@ export const initialState: UserState = {
 export const userReducer = createReducer(
   initialState,
   on(UserActions.getUsers,       state => ({ ...state, loading: true, error: null })),
-  on(UserActionsApi.getUsersSuccess, (state, action) => 
+  on(UserActionsApi.getUsersSuccess, (state, action) =>
     ({ ...state, usersList: action.usersList, loading: false })),
+  on(UserActionsApi.getUserByIdSuccess, (state, action) =>
+    ({ ...state, selectedUser: action.user, loading: false })),
   on(UserActionsApi.getUsersFail, (state, action) => ({ ...state, error: action.error, loading: false })),
 );
 

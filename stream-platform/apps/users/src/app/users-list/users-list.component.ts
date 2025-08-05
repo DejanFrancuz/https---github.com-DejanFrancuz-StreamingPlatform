@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserFacade, User } from '@stream-platform/users-data-access'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users-list',
@@ -9,30 +11,22 @@ import { UserFacade, User } from '@stream-platform/users-data-access'
 })
 export class UsersListComponent implements OnInit {
 
-  users: User[] | null = [];
+  users$!: Observable<User[] | null>;
   authorities: string[] | null = [];
+  displayedColumns: string[] = ['userId', 'username', 'firstName', 'lastName','email', 'role', 'actions'];
 
-  constructor(private userFacade: UserFacade) {
-
-  }
+  constructor(private userFacade: UserFacade, private router: Router) {}
 
   ngOnInit(): void {
     this.userFacade.getUsers();
 
-    this.userFacade.selectUsers$.subscribe(( users ) => {
-      this.users = users
-    });
-  }
-
-  hasPermission(permission: string): boolean {
-    const authorities = localStorage.getItem('authorities');
-    if (authorities !== null) {
-      if (authorities.includes(permission)) {
-        return true;
-      }
+    this.users$ = this.userFacade.selectUsers$;
     }
-    return false;
-  }
+
+    editUser(userId: number){
+      this.router.navigateByUrl(`/edit/${userId}`)
+
+    }
 
   deleteUser(id: number) {
     this.userFacade.deleteUser(id);

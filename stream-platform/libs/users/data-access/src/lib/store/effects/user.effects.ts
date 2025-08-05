@@ -6,6 +6,7 @@ import { map, catchError, switchMap, tap, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { UserActionsApi } from '../actions/user-index.actions';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class UserEffects {
@@ -17,8 +18,27 @@ export class UserEffects {
           map(users =>
             UserActionsApi.getUsersSuccess({ usersList: users })
         ),
-          catchError(error => { 
+          catchError(error => {
+            this.toastrService.success("Users get failed", error);
             return of(UserActionsApi.getUsersFail({ error }))
+        })
+        )
+      )
+    )
+  );
+
+  getUserById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.getUserById),
+      switchMap((action) =>
+        this.userService.getUserById(action.userId).pipe(
+          map(user =>{
+            return UserActionsApi.getUserByIdSuccess({ user })
+          }
+        ),
+          catchError(error => {
+            this.toastrService.success("User get failed", error);
+            return of(UserActionsApi.getUserByIdFail({ error }))
         })
         )
       )
@@ -31,9 +51,13 @@ export class UserEffects {
       switchMap((action) =>
         this.userService.addUser(action.user).pipe(
           map(() =>
-            UserActionsApi.addUserSuccess()
+          {
+            this.toastrService.success("User added successfully");
+            return UserActionsApi.addUserSuccess()
+          }
         ),
-          catchError(error => { 
+          catchError(error => {
+            this.toastrService.error("User add failed", error);
             return of(UserActionsApi.addUserFail({ error }))
         })
         )
@@ -46,10 +70,13 @@ export class UserEffects {
       ofType(UserActions.updateUser),
       switchMap((action) =>
         this.userService.updateUser(action.user).pipe(
-          map(() =>
-            UserActionsApi.updateUserSuccess()
+          map(() =>{
+            this.toastrService.success("User updated successfully");
+            return UserActionsApi.updateUserSuccess()
+          }
         ),
-          catchError(error => { 
+          catchError(error => {
+            this.toastrService.error("User update failed", error);
             return of(UserActionsApi.updateUserFail({ error }))
         })
         )
@@ -62,10 +89,13 @@ export class UserEffects {
       ofType(UserActions.deleteUser),
       switchMap((action) =>
         this.userService.deleteUser(action.userId).pipe(
-          map(() =>
-            UserActionsApi.deleteUserSuccess()
+          map(() =>{
+            this.toastrService.success("User deleted successfully");
+            return UserActionsApi.deleteUserSuccess()
+          }
         ),
-          catchError(error => { 
+          catchError(error => {
+            this.toastrService.error("User delete failed", error);
             return of(UserActionsApi.deleteUserFail({ error }))
         })
         )
@@ -73,7 +103,7 @@ export class UserEffects {
     )
   );
 
-  
 
-  constructor(private actions$: Actions, private userService: UserService, private router: Router) {}
+
+  constructor(private actions$: Actions, private userService: UserService, private router: Router, private toastrService: ToastrService) {}
 }

@@ -37,6 +37,7 @@
         <lib-person-dropdown
           *ngIf="isOpen"
           (closeDropdown)="closeDropdown()"
+          (goToProfile)="onProfile(person.userId)"
         ></lib-person-dropdown>
       </div>
     </div>

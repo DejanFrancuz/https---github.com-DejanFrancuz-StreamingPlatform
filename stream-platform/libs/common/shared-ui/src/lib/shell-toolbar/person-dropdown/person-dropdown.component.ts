@@ -15,6 +15,9 @@ export class PersonDropdownComponent {
   @Output()
   closeDropdown = new EventEmitter<void>();
 
+  @Output()
+  goToProfile = new EventEmitter<void>();
+
   onClose() {
     this.closeDropdown.emit();
   }
@@ -22,6 +25,10 @@ export class PersonDropdownComponent {
   onLogout(){
     this.authFacade.logout();
     this.onClose();
+  }
+
+  onProfile(){
+    this.goToProfile.emit();
   }
 
 }

@@ -1,5 +1,6 @@
 import nx from '@nx/eslint-plugin';
 import baseConfig from '../../eslint.config.mjs';
+import angularEslint from '@angular-eslint/eslint-plugin';
 
 export default [
   ...baseConfig,
@@ -27,8 +28,12 @@ export default [
     },
   },
   {
-    files: ['**/*.html'],
-    // Override or add rules here
-    rules: {},
+    files: ['**/*.ts'],
+    plugins: {
+      '@angular-eslint': angularEslint,
+    },
+    rules: {
+      '@angular-eslint/prefer-standalone': 'off',
+    },
   },
 ];

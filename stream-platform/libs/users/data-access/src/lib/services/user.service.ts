@@ -32,7 +32,7 @@ export class UserService {
   updateUser(user: User): Observable<any> {
     console.log(user);
     return this.httpClient
-      .put<any>('http://localhost:8080/api/users/getone/update', user);
+      .put<any>('http://localhost:8080/api/users/update', user);
   }
 
   deleteUser(id: number): Observable<any> {

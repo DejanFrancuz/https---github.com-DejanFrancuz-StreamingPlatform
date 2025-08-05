@@ -11,7 +11,7 @@ import { AuthFacade } from '@stream-platform/auth-data-access';
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
 
-  submitted: boolean = false;
+  submitted = false;
 
   constructor(
     private fb: FormBuilder,

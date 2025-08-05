@@ -4,7 +4,7 @@ import { User } from '../../models/User';
 export const getUsersSuccess = createAction('[User/API] Get Users Success', props<{ usersList: User[]}>());
 export const getUsersFail = createAction('[User/API] Get Users Fail', props<{ error: string}>());
 
-export const getUserByIdSuccess = createAction('[User/API] Get User by Id Success', props<{ user: User }>);
+export const getUserByIdSuccess = createAction('[User/API] Get User by Id Success', props<{ user: User }>());
 export const getUserByIdFail = createAction('[User/API] Get User by Id Fail', props<{ error: string}>());
 
 export const getUserByEmailSuccess = createAction('[User/API] Get User by Email Success',  props<{ user: User }>)
