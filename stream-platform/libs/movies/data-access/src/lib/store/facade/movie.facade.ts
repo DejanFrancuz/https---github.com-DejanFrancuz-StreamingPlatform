@@ -44,6 +44,10 @@ export class MovieFacade {
     this.store.dispatch(MovieActions.addMovieForPerson({ movieId }));
   }
 
+  likeMovieForPerson(movieId: number){
+    this.store.dispatch(MovieActions.likeMovieForPerson({ movieId }));
+  }
+
   addCartMovie(movie: MovieItem){
     this.store.dispatch(MovieActions.addMovieToCart({ movie }))
   }

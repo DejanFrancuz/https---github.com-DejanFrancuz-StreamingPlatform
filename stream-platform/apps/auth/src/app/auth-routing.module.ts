@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { CreateEditUserComponent } from './create-edit/create-edit.component';
 
 export const appRoutes: Route[] = [
   {
@@ -11,6 +12,10 @@ export const appRoutes: Route[] = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'create-edit',
+    component: CreateEditUserComponent,
   },
 ];
 

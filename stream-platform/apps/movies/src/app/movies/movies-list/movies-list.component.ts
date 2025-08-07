@@ -78,8 +78,18 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     this.moviesFacade.deleteMovie(movieId);
   }
 
+  likeMovie(movieId: number){
+    this.moviesFacade.likeMovieForPerson(movieId);
+  }
+
   watchMovie(movieId: number){
     this.router.navigateByUrl(`movies/watch-movie/${movieId}`);
+  }
+
+  filterByLike(){
+    this.filter = {...this.filter, like: true};
+    if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(this.pagequery, this.filter);
+    else this.moviesFacade.getMyMovies(this.pagequery, this.filter)
   }
 
   filterByGenre(genre: string){
@@ -89,6 +99,12 @@ export class MoviesListComponent implements OnInit, OnDestroy {
   }
   filterByDate(date: string){
     this.filter = {...this.filter, decade: date};
+    if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(this.pagequery, this.filter);
+    else this.moviesFacade.getMyMovies(this.pagequery, this.filter)
+  }
+
+  sortByYear(){
+    this.filter = {...this.filter, sort: true};
     if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(this.pagequery, this.filter);
     else this.moviesFacade.getMyMovies(this.pagequery, this.filter)
   }

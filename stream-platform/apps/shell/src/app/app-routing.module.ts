@@ -1,35 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { ShellLayoutComponent } from './layout/layout.component';
+import { AdminGuard, AuthGuard } from '@stream-platform/auth-data-access';
 
 export const appRoutes: Route[] = [
-// {
-    // path: '',
-    // component: ShellLayoutComponent,
-    // children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      {
-        path: 'auth',
-        loadChildren: () => import('auth/Module').then((m) => m.AuthModule),
-      },
-      {
-        path: 'dashboard',
-        loadChildren: () => import('dashboard/Module').then((m) => m.DashboardModule),
-      },
-      {
-        path: 'users',
-        loadChildren: () => import('users/Module').then((m) => m.UsersModule),
-      },
-      {
-        path: 'movies',
-        loadChildren: () => import('movies/Module').then((m) => m.MoviesModule),
-      },
-      // {
-      //   path: 'collection',
-      //   loadChildren: () => import('collection/Module').then((m) => m.CollectionModule),
-      // },
-    // ],
-  // },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {
+    path: 'auth',
+    loadChildren: () => import('auth/Module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('dashboard/Module').then((m) => m.DashboardModule),
+  },
+  {
+    path: 'users',
+    canActivate: [AdminGuard],
+    loadChildren: () => import('users/Module').then((m) => m.UsersModule),
+  },
+  {
+    path: 'movies',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('movies/Module').then((m) => m.MoviesModule),
+  },
 ];
 
 @NgModule({

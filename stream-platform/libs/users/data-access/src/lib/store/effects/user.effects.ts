@@ -45,20 +45,20 @@ export class UserEffects {
     )
   );
 
-  addUser$ = createEffect(() =>
+  createUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.addUser),
+      ofType(UserActions.createUser),
       switchMap((action) =>
-        this.userService.addUser(action.user).pipe(
+        this.userService.createUser(action.user).pipe(
           map(() =>
           {
-            this.toastrService.success("User added successfully");
-            return UserActionsApi.addUserSuccess()
+            this.toastrService.success("Create added successfully");
+            return UserActionsApi.createUserSuccess()
           }
         ),
           catchError(error => {
-            this.toastrService.error("User add failed", error);
-            return of(UserActionsApi.addUserFail({ error }))
+            this.toastrService.error("Create add failed", error);
+            return of(UserActionsApi.createUserFail({ error }))
         })
         )
       )

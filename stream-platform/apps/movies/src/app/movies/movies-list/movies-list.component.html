@@ -1,7 +1,7 @@
 <div class="w-[44rem] flex justify-between items-end mb-4">
   <mat-tab-group [(selectedIndex)]="selectedTabIndex" class="w-fit">
-    <mat-tab class="font-semibold" label="All Movies"></mat-tab>
-    <mat-tab class="font-semibold" label="My Movies"></mat-tab>
+    <mat-tab class="font-semibold" [label]= "isAdmin ? 'All Movies' : 'Shop Movies'"></mat-tab>
+    <mat-tab *ngIf="!isAdmin"  class="font-semibold" label="My Movies"></mat-tab>
   </mat-tab-group>
 
   <div class="flex flex-col">
@@ -13,6 +13,8 @@
         filter_alt
       </span>
       <span
+      (click)="filterByLike()"
+      [ngClass]="{'selected-icon': filter.like}"
       title="Filter by Like"
       class="material-symbols-outlined text-lg cursor-pointer">
         favorite
@@ -33,8 +35,11 @@
       >
         filter_list
       </span>
-      <span class="material-symbols-outlined text-lg cursor-pointer"
-      title="Sort by Like"
+      <span
+      (click)="sortByYear()"
+      [ngClass]="{'selected-icon': filter.sort}"
+      class="material-symbols-outlined text-lg cursor-pointer"
+      title="Sort"
       >
         swap_vert
       </span>
@@ -76,6 +81,8 @@
         <app-movies-item
           [movieItem]="movie"
           [isAdmin]="isAdmin"
+          [isLiked]="person?.likedMovies?.includes(movie.movieId) || false"
+          (likeMovie)="likeMovie($event)"
           (buyMovie)="buyMovieForPerson($event)"
           (viewMovie)="viewMovie($event)"
           (deleteMovie)="deleteMovie($event)"
@@ -103,6 +110,8 @@
         <app-movies-item
           [movieItem]="movie"
           [isMyPage]="true"
+          [isLiked]="person?.likedMovies?.includes(movie.movieId) || false"
+          (likeMovie)="likeMovie($event)"
           (viewMovie)="viewMovie($event)"
           (watchMovie)="watchMovie($event)"
         >

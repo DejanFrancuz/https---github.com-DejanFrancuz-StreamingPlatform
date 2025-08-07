@@ -17,6 +17,9 @@ export class MoviesItemComponent {
   isAdmin = false;
 
   @Input()
+  isLiked = false;
+
+  @Input()
   isMyPage = false;
 
   @Output()
@@ -30,6 +33,9 @@ export class MoviesItemComponent {
 
   @Output()
   watchMovie = new EventEmitter<number>();
+
+  @Output()
+  likeMovie = new EventEmitter<number>();
 
   onBuyMovie(){
     this.buyMovie.emit(this.movieItem);
@@ -51,5 +57,8 @@ export class MoviesItemComponent {
   return element.offsetWidth < element.scrollWidth;
 }
 
-
+onLikeMovie() {
+  this.isLiked = !this.isLiked;
+  this.likeMovie.emit(this.movieItem.movieId);
+}
 }

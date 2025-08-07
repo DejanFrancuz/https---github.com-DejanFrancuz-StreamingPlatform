@@ -30,8 +30,8 @@ export class UserFacade {
     this.store.dispatch(UserActions.getUserById({ userId }));
   }
 
-  addUser(user: User){
-    this.store.dispatch(UserActions.addUser({ user }));
+  createUser(user: User){
+    this.store.dispatch(UserActions.createUser({ user }));
   }
 
   updateUser(user: User){

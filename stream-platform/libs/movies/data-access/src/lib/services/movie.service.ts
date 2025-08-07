@@ -20,6 +20,8 @@ export class MovieService {
       .set('page', query.page.toString())
       .set('size', query.size.toString());
 
+    if (filter?.like) params = params.set('like', filter.like);
+    if (filter?.sort) params = params.set('sort', filter.sort);
     if (filter?.genre) params = params.set('genre', filter.genre);
     if (filter?.decade) params = params.set('decade', filter.decade);
 
@@ -55,6 +57,14 @@ export class MovieService {
       movieId
     );
   }
+
+  likeMovieForPerson(movieId: number): Observable<any> {
+    return this.httpClient.post<any>(
+      'http://localhost:8080/api/movies/like-movie-for-person',
+      movieId
+    );
+  }
+
   getMovieById(id: number): Observable<MovieItem> {
     return this.httpClient.get<MovieItem>(
       'http://localhost:8080/api/movies/get-one',

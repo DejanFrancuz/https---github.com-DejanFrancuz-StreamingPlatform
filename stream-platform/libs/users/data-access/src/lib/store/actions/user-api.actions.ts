@@ -13,8 +13,8 @@ export const getUserByEmailFail = createAction('[User/API] Get User by Email Fai
 export const updateUserSuccess = createAction('[User/API] Update User Success');
 export const updateUserFail = createAction('[User/API] Update User Fail', props<{ error: string}>());
 
-export const addUserSuccess = createAction('[User/API] Add User Success');
-export const addUserFail = createAction('[User/API] Add User Fail', props<{ error: string}>());
+export const createUserSuccess = createAction('[User/API] Create User Success');
+export const createUserFail = createAction('[User/API] Create User Fail', props<{ error: string}>());
 
 export const deleteUserSuccess = createAction('[User/API] Delete User Success');
 export const deleteUserFail = createAction('[User/API] Delete User Fail', props<{ error: string}>());

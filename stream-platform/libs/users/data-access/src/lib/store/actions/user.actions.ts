@@ -11,6 +11,6 @@ export const getUserByEmail = createAction('[User] Get User by Email',  props<{ 
 
 export const updateUser = createAction('[User] Update User',  props<{ user: User }>());
 
-export const addUser = createAction('[User] Add User',  props<{ user: User }>());
+export const createUser = createAction('[User] Create User',  props<{ user: User }>());
 
 export const deleteUser = createAction('[User] Delete User',  props<{ userId: number }>());

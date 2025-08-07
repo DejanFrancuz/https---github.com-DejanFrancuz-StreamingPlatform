@@ -20,5 +20,8 @@ export const addMovieFail = createAction('[Movie/API] Add Movie Fail', props<{ e
 export const addMovieForPersonSuccess = createAction('[Movie/API] Add Movie For Person Success');
 export const addMovieForPersonFail = createAction('[Movie/API] Add Movie For Person Fail', props<{ error: string}>());
 
+export const likeMovieForPersonSuccess = createAction('[Movie/API] Like Movie For Person Success');
+export const likeMovieForPersonFail = createAction('[Movie/API] Like Movie For Person Fail', props<{ error: string}>());
+
 export const deleteMovieSuccess = createAction('[Movie/API] Delete Movie Success');
 export const deleteMovieFail = createAction('[Movie/API] Delete Movie Fail', props<{ error: string}>());

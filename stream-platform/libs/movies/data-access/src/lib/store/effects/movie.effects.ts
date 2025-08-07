@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { MovieActionsApi } from '../actions/movie-index.actions';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MovieFacade } from '../facade/movie.facade';
 
 @Injectable()
 export class MovieEffects {
@@ -88,12 +89,32 @@ export class MovieEffects {
         this.movieService.addMovieForPerson(action.movieId).pipe(
           map(() => {
             this.toastrService.success("Movie for Person added successfully.");
+            this.movieService.getMyMovies({page: 0, size: 16});
             return MovieActionsApi.addMovieForPersonSuccess()
           }
         ),
           catchError(error => {
             this.toastrService.error("Add Movie for Person failed. \n ", error)
             return of(MovieActionsApi.addMovieForPersonFail({ error }))
+        })
+        )
+      )
+    )
+  );
+
+  likeMovieForPerson$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MovieActions.likeMovieForPerson),
+      switchMap((action) =>
+        this.movieService.likeMovieForPerson(action.movieId).pipe(
+          map(() => {
+            this.toastrService.success("Movie for Person liked successfully.");
+            return MovieActionsApi.likeMovieForPersonSuccess()
+          }
+        ),
+          catchError(error => {
+            this.toastrService.error("Like Movie for Person failed. \n ", error)
+            return of(MovieActionsApi.likeMovieForPersonFail({ error }))
         })
         )
       )
@@ -138,6 +159,5 @@ export class MovieEffects {
       )
     )
   );
-
   constructor(private actions$: Actions, private movieService: MovieService, private toastrService: ToastrService, private router: Router) {}
 }

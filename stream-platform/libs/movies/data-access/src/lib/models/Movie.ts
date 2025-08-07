@@ -12,4 +12,5 @@ export interface MovieFilter {
   like?: boolean,
   decade?: string,
   genre?: string,
+  sort?: boolean,
 }

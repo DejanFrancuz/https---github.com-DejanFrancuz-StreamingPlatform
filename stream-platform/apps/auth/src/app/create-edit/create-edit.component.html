@@ -47,9 +47,9 @@
         </mat-form-field>
       </div>
 
-      <mat-checkbox formControlName="changePassword">Change Password</mat-checkbox>
+      <mat-checkbox *ngIf="isEditMode" formControlName="changePassword">Change Password</mat-checkbox>
 
-      <div *ngIf="editForm.get('changePassword')?.value">
+      <div *ngIf="!isEditMode || showingPasswords">
       <mat-form-field class="w-full">
         <mat-label>Password</mat-label>
         <input matInput formControlName="password" type="password" />

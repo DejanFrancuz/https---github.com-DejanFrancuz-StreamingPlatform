@@ -4,7 +4,8 @@ export interface User {
     firstName: string,
     lastName: string,
     email: string,
-    userId: number,
+    userId?: number,
+    likedMovies?: number[],
     permissions: string[],
 }
 

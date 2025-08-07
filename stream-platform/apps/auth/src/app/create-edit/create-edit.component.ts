@@ -8,40 +8,25 @@ import { passwordsMatchValidator } from '../validators/password.validator';
 @Component({
   selector: 'app-edit-user',
   standalone: false,
-  templateUrl: './edit-user.component.html',
-  styleUrl: './edit-user.component.css',
+  templateUrl: './create-edit.component.html',
+  styleUrl: './create-edit.component.css',
 })
-export class EditUserComponent implements OnInit, OnDestroy {
-  userId!: number;
+export class CreateEditUserComponent implements OnInit, OnDestroy {
+  userId!: number | null;
 
   private unsubscribe$ = new Subject<void>();
 
-  changePassword = new FormControl(false);
+  // changePassword = new FormControl(false);
 
-  // passwordGroup = new FormGroup({
-  //   password: new FormControl('', []),
-  //   confirmPassword: new FormControl('', [])
-  // }, { validators: passwordsMatchValidator });
+  isEditMode = false;
 
-  editForm = new FormGroup(
-    {
-      email: new FormControl('', [Validators.required, Validators.email]),
-      username: new FormControl('', [Validators.required]),
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      permissions: new FormControl([''], [Validators.required]),
-
-      changePassword: new FormControl(false),
-      password: new FormControl(''),
-      confirmPassword: new FormControl(''),
-    },
-    { validators: passwordsMatchValidator }
-  );
+  editForm!: FormGroup;
 
   constructor(private userFacade: UserFacade, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('userId'));
+    this.isEditMode = !!this.userId;
 
     this.userFacade.getUserById(this.userId);
 
@@ -58,13 +43,46 @@ export class EditUserComponent implements OnInit, OnDestroy {
           });
         }
       });
+
+      this.editForm = new FormGroup(
+    {
+      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      permissions: new FormControl([''], [Validators.required]),
+
+       ...(this.isEditMode
+      ? {
+          changePassword: new FormControl(false),
+          password: new FormControl(''),
+          confirmPassword: new FormControl(''),
+        }
+      : {
+          password: new FormControl('', [Validators.required]),
+          confirmPassword: new FormControl('', [Validators.required]),
+        }),
+  },
+    { validators: passwordsMatchValidator }
+  );
   }
 
   onSubmit() {
     if (!this.editForm.valid) return;
 
+    const formValue = this.editForm.value as {
+    email: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    permissions: string[];
+    password?: string;
+    confirmPassword?: string;
+    changePassword?: boolean;
+  };
+
     const { email, username, firstName, lastName, permissions, changePassword, password } =
-      this.editForm.value;
+      formValue;
 
     if (
       email == null ||
@@ -80,7 +98,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       return;
     }
     const user: User = {
-      userId: this.userId,
+      userId: this.userId || undefined,
       email,
       username,
       firstName,
@@ -88,11 +106,15 @@ export class EditUserComponent implements OnInit, OnDestroy {
       permissions,
     };
 
-    if (password.trim() && changePassword) {
+    if (password.trim() && (changePassword || !this.isEditMode)) {
       user.password = password;
     }
 
-    this.userFacade.updateUser(user);
+    return this.isEditMode ? this.userFacade.updateUser(user) : this.userFacade.createUser(user);
+  }
+
+  get showingPasswords(){
+    return this.editForm.get('changePassword')?.value;
   }
 
   ngOnDestroy(): void {

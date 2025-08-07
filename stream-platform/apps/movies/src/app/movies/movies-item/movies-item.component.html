@@ -12,10 +12,10 @@
     <div
     class="absolute bottom-0 left-0 right-0 bg-black/60 w-full flex flex-row justify-between items-center py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
   >
-    <span class="material-symbols-outlined text-sm cursor-pointer">favorite</span>
-    <button (click)="onViewMovie()" class="material-symbols-outlined text-sm cursor-pointer">visibility</button>
-    <button *ngIf="!isMyPage; else watchAction"  (click)="isAdmin ? onDeleteMovie() : onBuyMovie()"
-    class="material-symbols-outlined text-sm cursor-pointer">{{isAdmin ? 'delete' : 'shopping_cart' }}</button>
+    <span (click)="onLikeMovie()" class="material-symbols-outlined text-sm cursor-pointer" [ngClass]="{'text-red-500': isLiked}">favorite</span>
+    <span (click)="onViewMovie()" class="material-symbols-outlined text-sm cursor-pointer">visibility</span>
+    <span *ngIf="!isMyPage; else watchAction"  (click)="isAdmin ? onDeleteMovie() : onBuyMovie()"
+    class="material-symbols-outlined text-sm cursor-pointer">{{isAdmin ? 'delete' : 'shopping_cart' }}</span>
 
     <ng-template #watchAction>
         <button (click)="onWatchMovie()"
@@ -26,7 +26,7 @@
   </div>
   </div>
 
-  <span #titleRef class="truncate max-w-32 text-sm p-2 cursor-default" [matTooltip]="movieItem.title"
+  <span #titleRef class="truncate max-w-32 text-sm pt-2 cursor-default" [matTooltip]="movieItem.title"
   matTooltipShowDelay="500" [matTooltipDisabled]=" !isTextOverflowing(titleRef)"
   >
     {{ movieItem.title }}</span

@@ -74,6 +74,10 @@ export class MovieViewComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('movies');
   }
 
+  onWatch(){
+    this.router.navigateByUrl(`movies/watch-movie/${this.movieId}`)
+  }
+
   onCart() {
     if (this.movie) this.movieFacade.addCartMovie(this.movie);
   }

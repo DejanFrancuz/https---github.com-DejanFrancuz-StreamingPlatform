@@ -8,16 +8,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { EditUserComponent } from './edit-user/edit-user.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
 
 @NgModule({
-  declarations: [UsersListComponent, EditUserComponent],
+  declarations: [UsersListComponent],
   imports: [
     CommonModule,
     MatTableModule,
-    ReactiveFormsModule, MatInputModule, MatSelectModule, MatFormFieldModule, MatCheckboxModule, CommonSharedUiModule, MatIconModule,
+    ReactiveFormsModule, MatSelectModule, MatFormFieldModule,
     RouterModule.forChild(
       [
         {
@@ -29,10 +28,6 @@ import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
           path: 'list',
           component: UsersListComponent
         },
-        {
-          path: 'edit/:userId',
-          component: EditUserComponent
-        }
       ],
     ),
   ],

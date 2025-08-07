@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 })
 export class ShellToolbarComponent{
   dark = false;
-  selectedLanguage = 'en';
 
   person$: Observable<Person | null>;
   cartCount$: Observable<number | null>
@@ -41,12 +40,7 @@ export class ShellToolbarComponent{
   }
 
   onProfile(userId: number){
-    this.router.navigateByUrl(`users/edit/${userId}`);
+    this.router.navigateByUrl(`auth/create-edit/${userId}`);
     this.isOpen = false;
-  }
-
-  changeLanguage(lang: string) {
-    this.selectedLanguage = lang;
-    // translateService.use(lang) …
   }
 }
