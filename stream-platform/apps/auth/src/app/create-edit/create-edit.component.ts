@@ -16,8 +16,6 @@ export class CreateEditUserComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  // changePassword = new FormControl(false);
-
   isEditMode = false;
 
   editForm!: FormGroup;

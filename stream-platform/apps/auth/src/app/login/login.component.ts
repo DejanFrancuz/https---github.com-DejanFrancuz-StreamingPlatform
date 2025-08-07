@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthFacade } from '@stream-platform/auth-data-access';
 
@@ -8,7 +8,7 @@ import { AuthFacade } from '@stream-platform/auth-data-access';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent {
   loginForm: FormGroup;
 
   submitted = false;
@@ -18,28 +18,16 @@ export class LoginComponent implements OnInit{
     private authFacade: AuthFacade,
   ) {
 
-    console.log('LoginModule initialized!');
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', Validators.required],
     });
-  }
-  ngOnInit(): void {
-    console.log("tu sam ne brini");
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       this.authFacade.login(this.loginForm.value);
       this.submitted = true;
-      console.log("submitt " + this.submitted);
-    }
-  }
-
-  onClear() {
-    if (this.loginForm.valid) {
-      // this.loginForm.;
     }
   }
 }

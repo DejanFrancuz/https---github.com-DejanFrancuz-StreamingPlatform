@@ -66,7 +66,6 @@ export class MoviesListComponent implements OnInit, OnDestroy {
   }
 
   buyMovieForPerson(movie: MovieItem){
-    // this.router.navigateByUrl(`movies/payment/${movieId}`);
     this.moviesFacade.addCartMovie(movie);
   }
 

@@ -9,14 +9,13 @@ import { MoviesPaymentComponent } from './movies/movies-payment/movies-payment.c
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatMenuModule } from '@angular/material/menu';
-import { MyMoviesListComponent } from './movies/my-movies-list/my-movies-list.component';
 import { MovieViewComponent } from './movies/movie-view/movie-view.component'
 import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovieWatchComponent } from './movies/movie-watch/movie-watch.component';
 
 @NgModule({
-  declarations: [MoviesListComponent, MoviesItemComponent, MoviesPaymentComponent, MyMoviesListComponent, MovieViewComponent, MovieWatchComponent],
+  declarations: [MoviesListComponent, MoviesItemComponent, MoviesPaymentComponent, MovieViewComponent, MovieWatchComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, CommonSharedUiModule, RouterModule.forChild(appRoutes), MatTooltipModule, MatTabsModule, MatPaginatorModule, MatMenuModule],
   providers: [],
   exports: [MoviesListComponent],

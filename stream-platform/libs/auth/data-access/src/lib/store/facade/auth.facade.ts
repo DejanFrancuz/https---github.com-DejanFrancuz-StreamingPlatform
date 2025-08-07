@@ -22,12 +22,10 @@ export class AuthFacade {
    * or more tasks in your Effects.
    */
   init(){
-    console.log("cimam init");
     this.store.dispatch(AuthActions.loadPerson());
   }
 
   login(loginForm: LoginForm){
-    console.log("cekaj druze " + loginForm.email);
     this.store.dispatch(AuthActions.login({loginForm: loginForm}));
   }
 

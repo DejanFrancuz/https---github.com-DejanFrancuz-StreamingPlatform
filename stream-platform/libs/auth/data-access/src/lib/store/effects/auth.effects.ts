@@ -42,10 +42,8 @@ export class AuthEffects {
   loadPerson$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loadPerson),
-      tap(() => console.log('🚀 loadPerson effect triggered')),
       mergeMap(() =>
         this.authService.getPersonData().pipe(
-          tap(() => console.log('💡 backend call sent')),
           map((personData) =>
             AuthActionsApi.loadPersonSuccess({ personData })
           ),

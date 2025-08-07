@@ -75,7 +75,6 @@ export class MovieService {
   }
 
   updateMovie(movie: MovieItem): Observable<any> {
-    console.log(movie);
     return this.httpClient.put<any>(
       'http://localhost:8080/api/movies/update',
       movie

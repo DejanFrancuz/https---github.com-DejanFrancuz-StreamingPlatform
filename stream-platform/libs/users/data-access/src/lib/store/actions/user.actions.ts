@@ -1,8 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from '../../models/User';
 
-// export const initUser = createAction('[User] Init');
-
 export const getUsers = createAction('[User] Get Users');
 
 export const getUserById = createAction('[User] Get User by Id', props<{ userId: number }>());

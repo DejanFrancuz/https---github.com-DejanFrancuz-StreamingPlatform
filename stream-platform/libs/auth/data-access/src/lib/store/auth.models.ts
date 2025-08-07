@@ -1,4 +1,4 @@
 export interface AuthEntity {
-  id: string | number; // Primary ID
+  id: string | number;
   name: string;
 }

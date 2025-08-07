@@ -11,7 +11,6 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
   login(req: LoginForm): Observable<Person> {
-    console.log("sta imamo " + req.email);
     return this.httpClient.post<Person>(
       'http://localhost:8080/auth/login',
       req

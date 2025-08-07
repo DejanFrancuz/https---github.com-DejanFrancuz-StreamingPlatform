@@ -35,8 +35,6 @@ export class MovieViewComponent implements OnInit, OnDestroy {
 
     this.movieFacade.getMovieById(this.movieId);
 
-    // this.movie = this.movieFacade.selectMovie$;
-
     this.movieForm = this.fb.group({
       title: ['', Validators.required],
       year: ['', Validators.required],

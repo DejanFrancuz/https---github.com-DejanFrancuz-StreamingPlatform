@@ -13,9 +13,7 @@ export class UiButtonComponent {
    @Output() buttonPressed = new EventEmitter<Event>();
 
   handleClick(event: Event) {
-    console.log("handle ui button");
     if (!this.disabled) {
-      console.log("handle ui button prosooo");
       this.buttonPressed.emit(event);
     }
   }

@@ -8,7 +8,7 @@ export const passwordsMatchValidator: ValidatorFn = (
   const confirmPassword = control.get('confirmPassword')?.value;
 
   if (!changePassword) {
-    return null; // lozinka se ne menja
+    return null;
   }
 
   if (!password || !confirmPassword) {

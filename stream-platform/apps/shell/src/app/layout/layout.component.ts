@@ -15,9 +15,8 @@ export class ShellLayoutComponent implements OnInit{
   constructor(private authFacade: AuthFacade) {}
 
   ngOnInit(): void {
-    console.log("dang bro why r u calling this so many times ?");
     this.personLoading$ = this.authFacade.personLoaded$;
     this.authFacade.init();
   }
-  
+
 }
