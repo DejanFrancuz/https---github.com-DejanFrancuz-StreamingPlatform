@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MovieItem } from '../models/Movie';
+import { MovieFilter, MovieItem } from '../models/Movie';
 import { PageEntity, PageQuery } from '@stream-platform/types';
 
 @Injectable({
@@ -10,42 +10,66 @@ import { PageEntity, PageQuery } from '@stream-platform/types';
 export class MovieService {
   constructor(private httpClient: HttpClient) {}
 
-  getMovies(query: PageQuery): Observable<PageEntity<MovieItem>> {
-    const params = new HttpParams({ fromObject: {
-    page: query.page.toString(),
-    size: query.size.toString(),
-    // ...(query.sort ? { sort: query.sort } : {})
-  }});
-    return this.httpClient.get<PageEntity<MovieItem>>('http://localhost:8080/api/movies/all', { params });
+  getMovies(
+    myMovies: boolean,
+    query: PageQuery,
+    filter?: MovieFilter
+  ): Observable<PageEntity<MovieItem>> {
+    let params = new HttpParams()
+      .set('myMovies', myMovies.toString())
+      .set('page', query.page.toString())
+      .set('size', query.size.toString());
+
+    if (filter?.genre) params = params.set('genre', filter.genre);
+    if (filter?.decade) params = params.set('decade', filter.decade);
+
+    return this.httpClient.get<PageEntity<MovieItem>>(
+      'http://localhost:8080/api/movies/all',
+      { params }
+    );
   }
 
-  getMyMovies(query: PageQuery): Observable<PageEntity<MovieItem>>{
-    const params = new HttpParams({ fromObject: {
-    page: query.page.toString(),
-    size: query.size.toString(),
-    // ...(query.sort ? { sort: query.sort } : {})
-  }});
-    return this.httpClient.get<PageEntity<MovieItem>>('http://localhost:8080/api/movies/my', { params });
+  getMyMovies(query: PageQuery, filter?: MovieFilter): Observable<PageEntity<MovieItem>> {
+    let params = new HttpParams()
+      .set('page', query.page.toString())
+      .set('size', query.size.toString());
+
+    if (filter?.genre) params = params.set('genre', filter.genre);
+    if (filter?.decade) params = params.set('decade', filter.decade);
+
+    return this.httpClient.get<PageEntity<MovieItem>>(
+      'http://localhost:8080/api/movies/my',
+      { params }
+    );
   }
 
   addMovie(movie: MovieItem): Observable<any> {
-    return this.httpClient
-      .post<any>('http://localhost:8080/api/movies/add', movie);
+    return this.httpClient.post<any>(
+      'http://localhost:8080/api/movies/add',
+      movie
+    );
   }
   addMovieForPerson(movieId: number): Observable<any> {
-    return this.httpClient
-      .post<any>('http://localhost:8080/api/movies/add-movie-for-person', movieId);
+    return this.httpClient.post<any>(
+      'http://localhost:8080/api/movies/add-movie-for-person',
+      movieId
+    );
   }
   getMovieById(id: number): Observable<MovieItem> {
-    return this.httpClient.get<MovieItem>('http://localhost:8080/api/movies/get-one', {
-      params: { movieId: id },
-    });
+    return this.httpClient.get<MovieItem>(
+      'http://localhost:8080/api/movies/get-one',
+      {
+        params: { movieId: id },
+      }
+    );
   }
 
   updateMovie(movie: MovieItem): Observable<any> {
     console.log(movie);
-    return this.httpClient
-      .put<any>('http://localhost:8080/api/movies/update', movie);
+    return this.httpClient.put<any>(
+      'http://localhost:8080/api/movies/update',
+      movie
+    );
   }
 
   deleteMovie(id: number): Observable<any> {

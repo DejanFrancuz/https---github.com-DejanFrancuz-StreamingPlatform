@@ -3,9 +3,22 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export const passwordsMatchValidator: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
+  const changePassword = control.get('changePassword')?.value;
   const password = control.get('password')?.value;
   const confirmPassword = control.get('confirmPassword')?.value;
 
-  return password === confirmPassword ? null : { passwordsMismatch: true };
+  if (!changePassword) {
+    return null; // lozinka se ne menja
+  }
+
+  if (!password || !confirmPassword) {
+    return { passwordRequired: true };
+  }
+
+  if (password !== confirmPassword) {
+    return { passwordsMismatch: true };
+  }
+
+  return null;
 };
 

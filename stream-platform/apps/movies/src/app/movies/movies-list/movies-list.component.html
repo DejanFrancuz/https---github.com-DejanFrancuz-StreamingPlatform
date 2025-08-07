@@ -1,4 +1,4 @@
-<div class="flex justify-between items-end mb-4">
+<div class="w-[44rem] flex justify-between items-end mb-4">
   <mat-tab-group [(selectedIndex)]="selectedTabIndex" class="w-fit">
     <mat-tab class="font-semibold" label="All Movies"></mat-tab>
     <mat-tab class="font-semibold" label="My Movies"></mat-tab>
@@ -6,25 +6,36 @@
 
   <div class="flex flex-col">
     <div class="flex gap-4 items-center pr-1 pl-6 pb-1">
-      <span class="material-symbols-outlined text-base cursor-default">
+      <span
+      (click)="resetFilter()"
+      title="Reset"
+      class="material-symbols-outlined text-base cursor-pointer">
         filter_alt
       </span>
-      <span class="material-symbols-outlined text-lg cursor-pointer">
+      <span
+      title="Filter by Like"
+      class="material-symbols-outlined text-lg cursor-pointer">
         favorite
       </span>
       <span class="material-symbols-outlined text-lg cursor-pointer"
+      title="Filter by decade"
       [matMenuTriggerFor]="dateMenu"
+      [ngClass]="{'selected-icon': filter.decade}"
         aria-label="Filter by decade">
         calendar_month
       </span>
       <span
         class="material-symbols-outlined text-lg cursor-pointer"
+      title="Filter by genre"
         [matMenuTriggerFor]="genreMenu"
+        [ngClass]="{'selected-icon': filter.genre}"
         aria-label="Filter by genre"
       >
         filter_list
       </span>
-      <span class="material-symbols-outlined text-lg cursor-pointer">
+      <span class="material-symbols-outlined text-lg cursor-pointer"
+      title="Sort by Like"
+      >
         swap_vert
       </span>
 
@@ -55,7 +66,7 @@
   </div>
 </div>
 
-<ng-container *ngIf="selectedTabIndex === 0">
+<ng-container class="w-[44rem]" *ngIf="selectedTabIndex === 0">
   <div
     class="flex flex-col items-center justify-center"
     *ngIf="movies$ | async as movies"
@@ -83,8 +94,10 @@
     </div>
   </div>
 </ng-container>
-<ng-container *ngIf="selectedTabIndex === 1">
-  <div *ngIf="myMovies$ | async as myMovies">
+<ng-container class="w-[44rem]" *ngIf="selectedTabIndex === 1">
+  <div
+  class="flex flex-col items-center justify-center"
+   *ngIf="myMovies$ | async as myMovies">
     <ul class="grid grid-cols-4 gap-10">
       <li *ngFor="let movie of myMovies.content">
         <app-movies-item

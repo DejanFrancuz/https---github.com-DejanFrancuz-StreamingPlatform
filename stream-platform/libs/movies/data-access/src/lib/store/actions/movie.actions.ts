@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { MovieItem } from '../../models/Movie';
+import { MovieFilter, MovieItem } from '../../models/Movie';
 import { PageQuery } from '@stream-platform/types';
 
 // export const initMovie = createAction('[Movie] Init');
 
-export const getMovies = createAction('[Movie] Get Movies',  props<{ pageQuery: PageQuery}>());
+export const getMovies = createAction('[Movie] Get Movies',  props<{ pageQuery: PageQuery, filter?: MovieFilter}>());
 
-export const getMyMovies = createAction('[Movie] Get MyMovies', props<{ pageQuery: PageQuery}>());
+export const getMyMovies = createAction('[Movie] Get MyMovies', props<{ pageQuery: PageQuery, filter?: MovieFilter}>());
 
 export const getMovieById = createAction('[Movie] Get Movie by Id', props<{ movieId: number }>());
 

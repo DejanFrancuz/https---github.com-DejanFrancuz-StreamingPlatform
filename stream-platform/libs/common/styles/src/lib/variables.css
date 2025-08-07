@@ -56,3 +56,17 @@
   --color-surface: #1E1E1E;
   --color-text: #ffed63;
 }
+
+::ng-deep .mat-select-arrow {
+  color: orange;
+}
+
+/* Donja linija (underline / indicator) kad je fokusiran */
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  border-bottom: 2px solid red;
+}
+
+/* Uklanjanje donje linije potpuno */
+::ng-deep .mat-form-field-underline {
+  display: none;
+}

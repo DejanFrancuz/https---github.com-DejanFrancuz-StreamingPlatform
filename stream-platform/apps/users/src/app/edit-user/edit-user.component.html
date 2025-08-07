@@ -1,7 +1,7 @@
 <div class="py-8 px-20 bg-surface rounded text-text max-w-2xl mx-auto">
   <h2 class="text-2xl font-semibold mb-6 text-primary">Edit User</h2>
 
-  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="editForm">
     <div class="flex flex-col gap-4">
       <div class="flex flex-row gap-6">
         <mat-form-field class="w-full">
@@ -47,6 +47,9 @@
         </mat-form-field>
       </div>
 
+      <mat-checkbox formControlName="changePassword">Change Password</mat-checkbox>
+
+      <div *ngIf="editForm.get('changePassword')?.value">
       <mat-form-field class="w-full">
         <mat-label>Password</mat-label>
         <input matInput formControlName="password" type="password" />
@@ -66,6 +69,8 @@
             </span>
         </mat-error>
       </mat-form-field>
+      </div>
+
     </div>
     <div class="text-red-500 text-sm h-5 pl-5">
   <span *ngIf="editForm.errors?.['passwordsMismatch'] && editForm.touched">
@@ -74,14 +79,12 @@
 </div>
 
     <div class="flex justify-end">
-      <button
-        mat-flat-button
-        color="primary"
-        type="submit"
-        [disabled]="editForm.invalid"
+      <stream-platform-ui-button
+        variant="primary"
+        (buttonPressed)="onSubmit()"
       >
-        Save Changes
-      </button>
+        Edit
+      </stream-platform-ui-button>
     </div>
   </form>
 </div>

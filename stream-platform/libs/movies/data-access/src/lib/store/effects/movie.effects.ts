@@ -6,7 +6,6 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MovieActionsApi } from '../actions/movie-index.actions';
 import { Router } from '@angular/router';
-import { getMovieById } from '../actions/movie.actions';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
@@ -15,7 +14,7 @@ export class MovieEffects {
     this.actions$.pipe(
       ofType(MovieActions.getMovies),
       switchMap((action) =>
-        this.movieService.getMovies(action.pageQuery).pipe(
+        this.movieService.getMovies( false, action.pageQuery, action.filter).pipe(
           map(movies =>
             MovieActionsApi.getMoviesSuccess({ moviesList: movies })
         ),
@@ -32,7 +31,7 @@ export class MovieEffects {
     this.actions$.pipe(
       ofType(MovieActions.getMyMovies),
       switchMap((action) =>
-        this.movieService.getMyMovies(action.pageQuery).pipe(
+        this.movieService.getMovies(true, action.pageQuery, action.filter).pipe(
           map(movies =>
             MovieActionsApi.getMyMoviesSuccess({ moviesList: movies })
         ),

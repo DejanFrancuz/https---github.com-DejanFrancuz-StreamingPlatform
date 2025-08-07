@@ -29,12 +29,15 @@ export default [
     },
   },
   {
-    files: ['**/*.ts'],
+    files: ['**/*.ts', '**/*.html'],
+    "parser": "@angular-eslint/template-parser",
     plugins: {
       '@angular-eslint': angularEslint,
     },
     rules: {
       '@angular-eslint/prefer-standalone': 'off',
+      '@angular-eslint/template/click-events-have-key-events': 'off',
+      '@angular-eslint/template/interactive-supports-focus': 'off'
     },
   },
 ];

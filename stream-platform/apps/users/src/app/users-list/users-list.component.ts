@@ -17,6 +17,18 @@ export class UsersListComponent implements OnInit {
 
   constructor(private userFacade: UserFacade, private router: Router) {}
 
+  roles = ['MEMBER', 'ADMIN'];
+
+onRoleChange(user: User, newRole: string): void {
+
+  const updatedUser = {
+    ...user,
+    permissions: [newRole]
+  };
+
+  this.userFacade.updateUser(updatedUser);
+}
+
   ngOnInit(): void {
     this.userFacade.getUsers();
 

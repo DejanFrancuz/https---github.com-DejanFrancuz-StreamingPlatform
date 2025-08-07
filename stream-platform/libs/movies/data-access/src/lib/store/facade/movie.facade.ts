@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 
 import * as MovieActions from '../actions/movie.actions';
 import * as MovieSelectors from '../selectors/movie.selectors';
-import { MovieItem } from '../../models/Movie';
+import { MovieFilter, MovieItem } from '../../models/Movie';
 import { PageQuery } from '@stream-platform/types';
 
 @Injectable({ providedIn: 'root' })
@@ -25,11 +25,11 @@ export class MovieFacade {
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
-  getMovies(pageQuery: PageQuery){
-    this.store.dispatch(MovieActions.getMovies({pageQuery}));
+  getMovies(pageQuery: PageQuery, filter?: MovieFilter){
+    this.store.dispatch(MovieActions.getMovies({pageQuery, filter}));
   }
-  getMyMovies(pageQuery: PageQuery){
-    this.store.dispatch(MovieActions.getMyMovies({pageQuery}));
+  getMyMovies(pageQuery: PageQuery, filter?: MovieFilter){
+    this.store.dispatch(MovieActions.getMyMovies({pageQuery, filter}));
   }
 
   getMovieById(movieId: number){

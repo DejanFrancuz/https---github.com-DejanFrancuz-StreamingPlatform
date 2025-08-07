@@ -9,87 +9,94 @@ import { passwordsMatchValidator } from '../validators/password.validator';
   selector: 'app-edit-user',
   standalone: false,
   templateUrl: './edit-user.component.html',
-  styleUrl: './edit-user.component.css'
+  styleUrl: './edit-user.component.css',
 })
-export class EditUserComponent implements OnInit, OnDestroy{
-
+export class EditUserComponent implements OnInit, OnDestroy {
   userId!: number;
 
   private unsubscribe$ = new Subject<void>();
 
+  changePassword = new FormControl(false);
 
-  editForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    username: new FormControl('', [Validators.required]),
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    permissions: new FormControl([''], [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required]),
-  },{ validators: passwordsMatchValidator })
+  // passwordGroup = new FormGroup({
+  //   password: new FormControl('', []),
+  //   confirmPassword: new FormControl('', [])
+  // }, { validators: passwordsMatchValidator });
 
-  constructor(private userFacade: UserFacade, private route: ActivatedRoute){}
+  editForm = new FormGroup(
+    {
+      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      permissions: new FormControl([''], [Validators.required]),
 
+      changePassword: new FormControl(false),
+      password: new FormControl(''),
+      confirmPassword: new FormControl(''),
+    },
+    { validators: passwordsMatchValidator }
+  );
+
+  constructor(private userFacade: UserFacade, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('userId'));
 
     this.userFacade.getUserById(this.userId);
 
-    this.userFacade.selectSelectedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((user) => {
-      if (user) {
+    this.userFacade.selectSelectedUser$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((user) => {
+        if (user) {
           this.editForm.patchValue({
             username: user.username,
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
-            permissions: user.permissions
+            permissions: user.permissions,
           });
-    }
-  });
+        }
+      });
   }
 
   onSubmit() {
     if (!this.editForm.valid) return;
 
-    const {
-    email,
-    username,
-    firstName,
-    lastName,
-    permissions,
-    password
-  } = this.editForm.value;
+    const { email, username, firstName, lastName, permissions, changePassword, password } =
+      this.editForm.value;
 
-  // Proveri da nijedno nije nullish
-  if (
-    email == null ||
-    username == null ||
-    firstName == null ||
-    lastName == null ||
-    permissions == null ||
-    password == null
-  ) {
-    console.error('Neka polja su null/undefined i forma ne bi trebalo da je validna.');
-    return;
-  }
-  const user: User = {
-    userId: this.userId,
-    email,
-    username,
-    firstName,
-    lastName,
-    permissions,
-    password,
-  };
+    if (
+      email == null ||
+      username == null ||
+      firstName == null ||
+      lastName == null ||
+      permissions == null ||
+      password == null
+    ) {
+      console.error(
+        'Neka polja su null/undefined i forma ne bi trebalo da je validna.'
+      );
+      return;
+    }
+    const user: User = {
+      userId: this.userId,
+      email,
+      username,
+      firstName,
+      lastName,
+      permissions,
+    };
 
-  this.userFacade.updateUser(user);
+    if (password.trim() && changePassword) {
+      user.password = password;
+    }
+
+    this.userFacade.updateUser(user);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
-
 }

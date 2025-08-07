@@ -7,3 +7,9 @@ export interface MovieItem {
   videoPreviewUrl?: string,
   genre: string,
 }
+
+export interface MovieFilter {
+  like?: boolean,
+  decade?: string,
+  genre?: string,
+}

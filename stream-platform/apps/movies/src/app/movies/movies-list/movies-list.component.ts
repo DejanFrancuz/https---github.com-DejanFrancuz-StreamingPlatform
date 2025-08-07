@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { AuthFacade, Person } from '@stream-platform/auth-data-access';
-import { MovieFacade, MovieItem } from '@stream-platform/movies-data-access';
+import { MovieFacade, MovieFilter, MovieItem } from '@stream-platform/movies-data-access';
 import { PageEntity, PageQuery } from '@stream-platform/types';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
@@ -20,10 +20,12 @@ export class MoviesListComponent implements OnInit, OnDestroy {
 
   person!: Person | null;
 
+  filter: MovieFilter = {}
+
     private unsubscribe$ = new Subject<void>();
 
 
-  selectedTabIndex = 0;
+  tabIndex = 0;
 
   pagequery: PageQuery = {
     page: 0,
@@ -57,8 +59,8 @@ export class MoviesListComponent implements OnInit, OnDestroy {
       size: event.pageSize,
     };
 
-    if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(query)
-      else this.moviesFacade.getMyMovies(query);
+    if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(query, this.filter)
+      else this.moviesFacade.getMyMovies(query, this.filter);
 
     this.pagequery = query;
   }
@@ -81,18 +83,42 @@ export class MoviesListComponent implements OnInit, OnDestroy {
   }
 
   filterByGenre(genre: string){
-    console.log(genre);
+    this.filter = {...this.filter, genre};
+    if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(this.pagequery, this.filter);
+    else this.moviesFacade.getMyMovies(this.pagequery, this.filter)
   }
   filterByDate(date: string){
-    console.log(date);
+    this.filter = {...this.filter, decade: date};
+    if(this.selectedTabIndex === 0) this.moviesFacade.getMovies(this.pagequery, this.filter);
+    else this.moviesFacade.getMyMovies(this.pagequery, this.filter)
   }
 
   get isAdmin(): boolean {
     return this.person?.permissions.includes('ADMIN') || false;
   }
 
+  get selectedTabIndex() {
+  return this.tabIndex;
+}
+
+set selectedTabIndex(value: number) {
+  this.tabIndex = value;
+  this.resetFilter();
+}
+
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
+  resetFilter() {
+  this.filter = {};
+  this.pagequery = { page: 0, size: 16 };
+  this.pagequery.page = 0;
+  if(this.selectedTabIndex === 0) {
+    this.moviesFacade.getMovies(this.pagequery, this.filter);
+  } else {
+    this.moviesFacade.getMyMovies(this.pagequery, this.filter);
+  }
+}
 }
