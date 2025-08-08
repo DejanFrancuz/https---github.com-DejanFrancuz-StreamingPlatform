@@ -1,4 +1,4 @@
-<div *ngIf="!submitted; else spinner">
+<!-- <div *ngIf="!submitted; else spinner"> -->
 <form
   [formGroup]="loginForm"
   (ngSubmit)="onSubmit()"
@@ -33,9 +33,9 @@
     </div>
   </div>
 </form>
-</div>
+<!-- </div> -->
 
-<ng-template #spinner>
+<!-- <ng-template #spinner>
     <mat-spinner strokeWidth="5" diameter="50" strokeWidth="5"></mat-spinner>
-</ng-template>
+</ng-template> -->
 

@@ -28,6 +28,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authFacade.login(this.loginForm.value);
       this.submitted = true;
+      this.loginForm.reset();
     }
   }
 }

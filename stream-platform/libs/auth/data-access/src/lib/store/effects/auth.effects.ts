@@ -6,6 +6,7 @@ import { map, exhaustMap, catchError, switchMap, tap, mergeMap } from 'rxjs/oper
 import { of } from 'rxjs';
 import { AuthActionsApi } from '../actions/auth-index.actions';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthEffects {
@@ -16,10 +17,12 @@ export class AuthEffects {
         this.authService.login({ email: action.loginForm.email, password: action.loginForm.password }).pipe(
           map(personData => {
             this.router.navigate(['/dashboard']);
+            this.toastrService.success("You are logged in!\n \tWelcome!");
             return AuthActionsApi.loginSuccess({ personData })
         }),
           catchError(error => {
-            this.router.navigate(['/auth/login']);
+            // this.router.navigate(['/auth']);
+            this.toastrService.error("Something went wrong :/ \n Please try again");
             return of(AuthActionsApi.loginFailure({ error }))
         })
         )
@@ -44,8 +47,9 @@ export class AuthEffects {
       ofType(AuthActions.loadPerson),
       mergeMap(() =>
         this.authService.getPersonData().pipe(
-          map((personData) =>
-            AuthActionsApi.loadPersonSuccess({ personData })
+          map((personData) => {
+            return AuthActionsApi.loadPersonSuccess({ personData })
+          }
           ),
           catchError((error) =>
             of(AuthActionsApi.loadPersonFail({ error: error.message }))
@@ -62,5 +66,5 @@ export class AuthEffects {
     )
   , { dispatch: false });
 
-  constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
+  constructor(private actions$: Actions, private toastrService: ToastrService, private authService: AuthService, private router: Router) {}
 }

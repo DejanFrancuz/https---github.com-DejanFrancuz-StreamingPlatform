@@ -1,5 +1,5 @@
 <div class="py-8 px-20 bg-surface rounded text-text max-w-2xl mx-auto">
-  <h2 class="text-2xl font-semibold mb-6 text-primary">Edit User</h2>
+  <h2 class="text-2xl font-semibold mb-6 text-primary">{{ isEditMode ?  'Edit User' : 'Create account'}}</h2>
 
   <form [formGroup]="editForm">
     <div class="flex flex-col gap-4">
@@ -83,7 +83,7 @@
         variant="primary"
         (buttonPressed)="onSubmit()"
       >
-        Edit
+        {{ isEditMode ?  'Edit' : 'Register'}}
       </stream-platform-ui-button>
     </div>
   </form>

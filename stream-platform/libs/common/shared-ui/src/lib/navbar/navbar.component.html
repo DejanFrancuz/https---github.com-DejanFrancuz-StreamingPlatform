@@ -9,11 +9,11 @@
         <li class="nav-item text-sm">
           <a routerLink="/movies" routerLinkActive="active">MOVIES</a>
         </li>
-        <li class="nav-item text-sm">
-          <a routerLink="/settings" routerLinkActive="active">SETTINGS</a>
-        </li>
         <li *ngIf="!person" class="nav-item text-sm">
           <a routerLink="/auth/create-edit" routerLinkActive="active">REGISTER</a>
+        </li>
+        <li *ngIf="!person" class="nav-item text-sm">
+          <a routerLink="/auth/login" routerLinkActive="active">LOGIN</a>
         </li>
       </ul>
     </nav>

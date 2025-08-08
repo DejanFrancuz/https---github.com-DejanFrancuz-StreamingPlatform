@@ -5,7 +5,7 @@ import { UserService } from '../../services/user.service';
 import { map, catchError, switchMap, tap, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { UserActionsApi } from '../actions/user-index.actions';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
@@ -37,7 +37,6 @@ export class UserEffects {
           }
         ),
           catchError(error => {
-            this.toastrService.success("User get failed", error);
             return of(UserActionsApi.getUserByIdFail({ error }))
         })
         )
@@ -52,12 +51,13 @@ export class UserEffects {
         this.userService.createUser(action.user).pipe(
           map(() =>
           {
-            this.toastrService.success("Create added successfully");
+            this.toastrService.success("You have registred successfully!");
+            this.router.navigateByUrl('auth/login');
             return UserActionsApi.createUserSuccess()
           }
         ),
           catchError(error => {
-            this.toastrService.error("Create add failed", error);
+            this.toastrService.error("Registration failed", error);
             return of(UserActionsApi.createUserFail({ error }))
         })
         )
@@ -105,5 +105,5 @@ export class UserEffects {
 
 
 
-  constructor(private actions$: Actions, private userService: UserService, private router: Router, private toastrService: ToastrService) {}
+  constructor(private actions$: Actions, private userService: UserService, private route: ActivatedRoute, private router: Router, private toastrService: ToastrService) {}
 }

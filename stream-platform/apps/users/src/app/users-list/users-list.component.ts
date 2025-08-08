@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthFacade, Person } from '@stream-platform/auth-data-access';
 import { UserFacade, User } from '@stream-platform/users-data-access'
 import { Observable } from 'rxjs';
 
@@ -12,10 +13,10 @@ import { Observable } from 'rxjs';
 export class UsersListComponent implements OnInit {
 
   users$!: Observable<User[] | null>;
-  authorities: string[] | null = [];
+  person$!: Observable<Person | null>
   displayedColumns: string[] = ['userId', 'username', 'firstName', 'lastName','email', 'role', 'actions'];
 
-  constructor(private userFacade: UserFacade, private router: Router) {}
+  constructor(private userFacade: UserFacade, private authFacade: AuthFacade, private router: Router) {}
 
   roles = ['MEMBER', 'ADMIN'];
 
@@ -30,6 +31,7 @@ onRoleChange(user: User, newRole: string): void {
 }
 
   ngOnInit(): void {
+    this.person$ = this.authFacade.selectedAuthPerson$;
     this.userFacade.getUsers();
 
     this.users$ = this.userFacade.selectUsers$;
