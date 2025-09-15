@@ -1,0 +1,56 @@
+<div class="py-8 px-20 bg-surface rounded text-text max-w-2xl mx-auto">
+  <h2 class="text-2xl font-semibold mb-6 text-primary">Movie Payment</h2>
+
+  <form [formGroup]="paymentForm">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-row gap-6">
+        <mat-form-field class="w-full">
+          <mat-label>Name on Card</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error *ngIf="paymentForm.get('name')?.hasError('required')">
+            <span class="text-red-500 text-sm" >
+              Name is required
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Card Number</mat-label>
+          <input matInput formControlName="cardNumber" />
+          <mat-error *ngIf="paymentForm.get('cardNumber')?.hasError('required')">
+            <span class="text-red-500 text-sm" >
+              Card number is required
+            </span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="flex flex-row gap-6">
+        <mat-form-field class="w-full">
+          <mat-label>Expiration Date</mat-label>
+          <input matInput formControlName="cardDate" placeholder="MM/YY"/>
+          <mat-error *ngIf="paymentForm.get('cardDate')?.hasError('required')">
+            <span class="text-red-500 text-sm" >
+              Expiration date is required
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>CVV</mat-label>
+          <input matInput formControlName="cardCVV" type="password" maxlength="4"/>
+          <mat-error *ngIf="paymentForm.get('cardCVV')?.hasError('required')">
+            <span class="text-red-500 text-sm" >
+              CVV is required
+            </span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="flex justify-end mt-8">
+        <stream-platform-ui-button variant="primary" (buttonPressed)="onSubmit()" [disabled]="paymentForm.invalid">
+          Pay
+        </stream-platform-ui-button>
+      </div
+
+</div>

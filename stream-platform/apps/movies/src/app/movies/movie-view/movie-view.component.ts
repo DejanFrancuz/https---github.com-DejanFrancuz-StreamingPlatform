@@ -68,8 +68,9 @@ export class MovieViewComponent implements OnInit, OnDestroy {
   }
 
   onBuy() {
-    this.moviesFacade.addMovieForPerson(this.movieId);
-    this.router.navigateByUrl('movies');
+    this.router.navigateByUrl(`payment/movie-payment/${this.movieId}`);
+    // this.moviesFacade.addMovieForPerson(this.movieId);
+    // this.router.navigateByUrl('movies');
   }
 
   onWatch(){
