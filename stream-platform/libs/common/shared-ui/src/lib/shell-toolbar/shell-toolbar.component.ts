@@ -39,6 +39,10 @@ export class ShellToolbarComponent{
     document.body.classList.toggle('dark-theme', this.dark);
   }
 
+  goToCart(){
+    this.router.navigateByUrl('payment/shopping-cart');
+  }
+
   onProfile(userId: number){
     this.router.navigateByUrl(`auth/create-edit/${userId}`);
     this.isOpen = false;

@@ -18,6 +18,7 @@ import { AuthDataAccessModule } from '@stream-platform/auth-data-access';
 import { MoviesDataAccessModule } from '@stream-platform/movies-data-access';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { PaymentDataAccessModule } from '@stream-platform/payment-data-access';
 
 @NgModule({
   declarations: [AppComponent, ShellLayoutComponent],
@@ -39,6 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
     AuthDataAccessModule,
     UsersDataAccessModule,
     MoviesDataAccessModule,
+    PaymentDataAccessModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

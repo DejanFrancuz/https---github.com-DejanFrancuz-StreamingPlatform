@@ -3,14 +3,16 @@ import { MoviePaymentComponent } from './payment/movie-payment/movie-payment.com
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormField, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
+import { appRoutes } from './app.routes';
+import { ShoppingCartComponent } from './payment/shopping-cart/shopping-cart.component';
 
 @NgModule({
-  declarations: [MoviePaymentComponent],
+  declarations: [MoviePaymentComponent, ShoppingCartComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -19,8 +21,8 @@ import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
     MatFormFieldModule,
     MatCheckboxModule,
     CommonSharedUiModule,
-    RouterModule.forChild([])],
+    RouterModule.forChild(appRoutes)],
   providers: [],
-  exports: [ MoviePaymentComponent ],
+  exports: [ MoviePaymentComponent, ShoppingCartComponent ],
 })
 export class PaymentModule {}

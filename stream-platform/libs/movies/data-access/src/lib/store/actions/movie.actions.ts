@@ -16,6 +16,8 @@ export const addMovie = createAction('[Movie] Add Movie',  props<{ movie: MovieI
 
 export const addMovieToCart = createAction('[Movie] Add Movie To Cart',  props<{ movie: MovieItem }>());
 
+export const removeMovieFromCart = createAction('[Movie] Remove Movie From Cart',  props<{ movieId: number }>());
+
 export const addMovieForPerson = createAction('[Movie] Add Movie For Person',  props<{ movieId: number }>());
 
 export const likeMovieForPerson = createAction('[Movie] Like Movie For Person',  props<{ movieId: number }>());

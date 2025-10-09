@@ -15,10 +15,10 @@ export const appRoutes: Route[] =
           path: 'list',
           component: MoviesListComponent
         },
-        {
-          path: 'payment/:movieId',
-          component: MoviesPaymentComponent
-        },
+        // {
+        //   path: 'payment/:movieId',
+        //   component: MoviesPaymentComponent
+        // },
         {
           path: 'view-movie/:movieId',
           component: MovieViewComponent

@@ -52,6 +52,10 @@ export class MovieFacade {
     this.store.dispatch(MovieActions.addMovieToCart({ movie }))
   }
 
+  removeCartMovie(movieId: number){
+    this.store.dispatch(MovieActions.removeMovieFromCart({ movieId }))
+  }
+
   updateMovie(movie: MovieItem){
     this.store.dispatch(MovieActions.updateMovie({ movie }));
   }

@@ -105,5 +105,5 @@ export class UserEffects {
 
 
 
-  constructor(private actions$: Actions, private userService: UserService, private route: ActivatedRoute, private router: Router, private toastrService: ToastrService) {}
+  constructor(private actions$: Actions, private userService: UserService, private router: Router, private toastrService: ToastrService) {}
 }

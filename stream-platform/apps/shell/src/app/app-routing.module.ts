@@ -25,6 +25,11 @@ export const appRoutes: Route[] = [
     canActivate: [AuthGuard],
     loadChildren: () => import('movies/Module').then((m) => m.MoviesModule),
   },
+  {
+    path: 'payment',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('payment/Module').then((m) => m.PaymentModule),
+  },
 ];
 
 @NgModule({

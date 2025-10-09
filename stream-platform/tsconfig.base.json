@@ -24,6 +24,9 @@
       "@stream-platform/movies-data-access": [
         "libs/movies/data-access/src/index.ts"
       ],
+      "@stream-platform/payment-data-access": [
+        "libs/payment/data-access/src/index.ts"
+      ],
       "@stream-platform/types": ["libs/common/types/index.ts"],
       "@stream-platform/users-data-access": [
         "libs/users/data-access/src/index.ts"

@@ -8,6 +8,7 @@
       sunny
     </span>
     <span class="material-symbols-outlined relative cursor-pointer"
+    (click)="goToCart()"
       >shopping_cart
       <span
         *ngIf="cartCount$ | async as count"
