@@ -40,8 +40,8 @@ export class MovieFacade {
     this.store.dispatch(MovieActions.addMovie({ movie }));
   }
 
-  addMovieForPerson(movieId: number){
-    this.store.dispatch(MovieActions.addMovieForPerson({ movieId }));
+  addMovieForPerson(movieIds: number[]){
+    this.store.dispatch(MovieActions.addMovieForPerson({ movieIds }));
   }
 
   likeMovieForPerson(movieId: number){
@@ -49,11 +49,15 @@ export class MovieFacade {
   }
 
   addCartMovie(movie: MovieItem){
-    this.store.dispatch(MovieActions.addMovieToCart({ movie }))
+    this.store.dispatch(MovieActions.addMovieToCart({ movie }));
   }
 
   removeCartMovie(movieId: number){
-    this.store.dispatch(MovieActions.removeMovieFromCart({ movieId }))
+    this.store.dispatch(MovieActions.removeMovieFromCart({ movieId }));
+  }
+
+  clearShoppingCart(){
+    this.store.dispatch(MovieActions.clearShoppingCart());
   }
 
   updateMovie(movie: MovieItem){

@@ -13,6 +13,10 @@ export const appRoutes: Route[] = [
         component: MoviePaymentComponent
     },
     {
+        path: 'movie-payment',
+        component: MoviePaymentComponent
+    },
+    {
         path: 'shopping-cart',
         component: ShoppingCartComponent
     }

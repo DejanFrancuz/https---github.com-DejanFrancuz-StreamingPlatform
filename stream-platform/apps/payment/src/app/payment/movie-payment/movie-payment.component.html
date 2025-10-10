@@ -1,28 +1,23 @@
 <div
   class="flex flex-col gap-10 items-center min-h-screen bg-background text-text"
 >
-  <div *ngIf="movie">
-    <div class="flex flex-row justify-between w-96 rounded border border-text">
-      <div class="w-24 h-40">
-        <img
-          [src]="'http://localhost:8080/' + movie.posterUrl"
-          alt="Poster"
-          class="w-full h-full object-cover"
-        />
-      </div>
-      <div class="flex flex-col py-4 pr-12 gap-2">
-        <span class="text-lg font-bold">
-          {{ movie.title }} ({{ movie.year }})
-        </span>
-        <span class="text-sm italic">
-          {{ movie.genre }}
-        </span>
-        <span class="mt-8">
-          Price: $5.00
-        </span>
+  <div *ngIf="movie$ | async as movie; else cart_view">
+    <app-movie-card [movie]="movie"></app-movie-card>
+    <p class="p-6">Total Price = ${{ movie.price | number : '1.2-2' }}</p>
+  </div>
+  <ng-template #cart_view>
+    <div *ngIf="cartMovies$ | async as cartMovies; else no_movies">
+      <div class="flex flex-col gap-4">
+        <app-movie-card
+          *ngFor="let movie of cartMovies"
+          [movie]="movie"
+        ></app-movie-card>
+        <p class="p-6">
+          Total Price = ${{ getTotalPrice(cartMovies) | number : '1.2-2' }}
+        </p>
       </div>
     </div>
-  </div>
+  </ng-template>
   <form
     id="payment-form"
     class="flex flex-col w-96 gap-6 py-8 px-2 bg-[var(--color-surface)] rounded text-text"
@@ -42,69 +37,7 @@
     <div id="payment-message" class="hidden"></div>
   </form>
 </div>
-<!-- <div *ngIf="loading$ | async">Processing...</div>
-<div *ngIf="success$ | async">✅ Payment successful!</div>
-<div *ngIf="error$ | async as error">❌ {{ error }}</div> -->
-<!--
-<div class="flex flex-col w-96 gap-6 py-8 px-2 bg-[var(--color-surface)] rounded text-text">
 
-<div id="card-element" class="bg-[var(--color-background)] p-6 rounded"></div>
-<div id="card-errors" role="alert"></div>
-
-<button (click)="pay()" [disabled]="!card">Pay</button>
-</div> -->
-
-<!-- <div class="py-8 px-20 bg-surface rounded text-text max-w-2xl mx-auto">
-  <h2 class="text-2xl font-semibold mb-6 text-primary">Movie Payment</h2>
-
-  <form [formGroup]="paymentForm">
-    <div class="flex flex-col gap-4">
-      <div class="flex flex-row gap-6">
-        <mat-form-field class="w-full">
-          <mat-label>Name on Card</mat-label>
-          <input matInput formControlName="name" />
-          <mat-error *ngIf="paymentForm.get('name')?.hasError('required')">
-            <span class="text-red-500 text-sm" >
-              Name is required
-            </span>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="w-full">
-          <mat-label>Card Number</mat-label>
-          <input matInput formControlName="cardNumber" />
-          <mat-error *ngIf="paymentForm.get('cardNumber')?.hasError('required')">
-            <span class="text-red-500 text-sm" >
-              Card number is required
-            </span>
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="flex flex-row gap-6">
-        <mat-form-field class="w-full">
-          <mat-label>Expiration Date</mat-label>
-          <input matInput formControlName="cardDate" placeholder="MM/YY"/>
-          <mat-error *ngIf="paymentForm.get('cardDate')?.hasError('required')">
-            <span class="text-red-500 text-sm" >
-              Expiration date is required
-            </span>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="w-full">
-          <mat-label>CVV</mat-label>
-          <input matInput formControlName="cardCVV" type="password" maxlength="4"/>
-          <mat-error *ngIf="paymentForm.get('cardCVV')?.hasError('required')">
-            <span class="text-red-500 text-sm" >
-              CVV is required
-            </span>
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="flex justify-end mt-8">
-        <stream-platform-ui-button variant="primary" (buttonPressed)="onSubmit()" [disabled]="paymentForm.invalid">
-          Pay
-        </stream-platform-ui-button>
-      </div> -->
+<ng-template #no_movies>
+  <p>Your cart is empty</p>
+</ng-template>

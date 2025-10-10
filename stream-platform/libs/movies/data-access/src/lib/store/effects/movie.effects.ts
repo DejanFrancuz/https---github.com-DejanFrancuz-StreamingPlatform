@@ -86,10 +86,11 @@ export class MovieEffects {
     this.actions$.pipe(
       ofType(MovieActions.addMovieForPerson),
       switchMap((action) =>
-        this.movieService.addMovieForPerson(action.movieId).pipe(
+        this.movieService.addMovieForPerson(action.movieIds).pipe(
           map(() => {
             this.toastrService.success("Movie for Person added successfully.");
             this.movieService.getMyMovies({page: 0, size: 16});
+            this.router.navigateByUrl('movies/list');
             return MovieActionsApi.addMovieForPersonSuccess()
           }
         ),

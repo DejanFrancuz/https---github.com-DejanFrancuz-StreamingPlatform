@@ -1,5 +1,5 @@
-<div *ngIf="cartMovies$ | async as cartMovies">
-
+<div *ngIf="cartMovies$ | async as cartMovies; else no_movies">
+  <div class="flex flex-col">
       <ul class="grid grid-cols-4 gap-10">
       <li *ngFor="let movie of cartMovies">
         <div class="flex flex-col justify-between items-center rounded border border-text">
@@ -29,5 +29,28 @@
       </div>
       </li>
     </ul>
+    <div class="flex flex-row justify-between items-center px-4 pt-16">
+      <stream-platform-ui-button
+      (buttonPressed)="goToMovies()"
+      variant="primary"
+      >
+      Back
+      </stream-platform-ui-button>
+
+      <stream-platform-ui-button
+        (buttonPressed)="goToCheckout()"
+        variant="success"
+        [disabled]="cartMovies.length === 0"
+      >
+        Checkout
+      </stream-platform-ui-button>
     </div>
+    </div>
+    </div>
+
+    <ng-template #no_movies>
+      <p>There is no movies in your shopping cart!</p>
+      <p>Go to the <a routerLink="/movies">Movies</a> page to add some.</p>
+    </ng-template>
+
 

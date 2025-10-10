@@ -56,5 +56,8 @@ export const userReducer = createReducer(
     const newCart = state.cartMovies.filter( movie => movie.movieId !== action.movieId )
     return {...state, cartMovies: newCart}
   }),
+  on(MovieActions.clearShoppingCart, (state) => {
+    return {...state, cartMovies: []}
+  }),
 );
 

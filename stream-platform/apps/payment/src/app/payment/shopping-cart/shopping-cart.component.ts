@@ -26,6 +26,15 @@ export class ShoppingCartComponent implements OnInit{
     console.log('Shopping cart initialized');
   }
 
+  goToMovies(){
+    this.router.navigateByUrl('movies/list');
+  }
+
+  goToCheckout(){
+    this.router.navigateByUrl('payment/movie-payment');
+  }
+
+
   removeFromCart(movieId: number) {
     this.movieFacade.removeCartMovie(movieId);
   }

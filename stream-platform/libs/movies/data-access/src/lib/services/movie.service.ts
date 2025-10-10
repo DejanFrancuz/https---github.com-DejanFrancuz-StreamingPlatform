@@ -51,10 +51,10 @@ export class MovieService {
       movie
     );
   }
-  addMovieForPerson(movieId: number): Observable<any> {
+  addMovieForPerson(movieIds: number[]): Observable<any> {
     return this.httpClient.post<any>(
       'http://localhost:8080/api/movies/add-movie-for-person',
-      movieId
+      movieIds
     );
   }
 

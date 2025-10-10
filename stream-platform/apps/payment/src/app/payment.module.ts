@@ -10,9 +10,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonSharedUiModule } from '@stream-platform/common-shared-ui';
 import { appRoutes } from './app.routes';
 import { ShoppingCartComponent } from './payment/shopping-cart/shopping-cart.component';
+import { MovieCardComponent } from './payment/movie-payment/movie-card/movie-card.component';
 
 @NgModule({
-  declarations: [MoviePaymentComponent, ShoppingCartComponent],
+  declarations: [
+    MoviePaymentComponent,
+    ShoppingCartComponent,
+    MovieCardComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,8 +26,9 @@ import { ShoppingCartComponent } from './payment/shopping-cart/shopping-cart.com
     MatFormFieldModule,
     MatCheckboxModule,
     CommonSharedUiModule,
-    RouterModule.forChild(appRoutes)],
+    RouterModule.forChild(appRoutes),
+  ],
   providers: [],
-  exports: [ MoviePaymentComponent, ShoppingCartComponent ],
+  exports: [MoviePaymentComponent, ShoppingCartComponent],
 })
 export class PaymentModule {}

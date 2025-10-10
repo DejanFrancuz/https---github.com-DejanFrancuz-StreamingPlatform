@@ -6,6 +6,7 @@ export interface MovieItem {
   posterUrl?: string,
   videoPreviewUrl?: string,
   genre: string,
+  price: number,
 }
 
 export interface MovieFilter {

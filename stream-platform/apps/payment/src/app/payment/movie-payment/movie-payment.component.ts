@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-import { catchError, from, map, Observable, Subject, takeUntil } from 'rxjs';
-// import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ConfirmPaymentParams, PaymentFacade } from '@stream-platform/payment-data-access';
+import { from, Observable, Subject, takeUntil } from 'rxjs';
+import { PaymentFacade } from '@stream-platform/payment-data-access';
 import { loadStripe, Stripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieFacade, MovieItem } from '@stream-platform/movies-data-access';
@@ -17,7 +15,9 @@ import { MovieFacade, MovieItem } from '@stream-platform/movies-data-access';
 export class MoviePaymentComponent implements OnInit{
 
   movieId!: number;
-  movie!: MovieItem | null;
+  movie$!: Observable<MovieItem | null>;
+  cartMovies$!: Observable<MovieItem[] | null>;
+
   stripe!: Stripe | null;
   card!: StripeCardElement;
 
@@ -46,15 +46,10 @@ export class MoviePaymentComponent implements OnInit{
   async ngOnInit() {
     this.movieId = Number(this.route.snapshot.paramMap.get('movieId'));
 
-    this.movieFacade.getMovieById(this.movieId);
+    this.movie$ = this.movieFacade.selectMovie$;
 
-    this.movieFacade.selectMovie$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((movie) => {
-        if (movie) {
-          this.movie = movie;
-        }
-      });
+    if(this.movieId) this.movieFacade.getMovieById(this.movieId);
+    else this.cartMovies$ = this.movieFacade.selectCartMovies$;
 
     this.stripe = await loadStripe('pk_test_51S7dt7PHHbkxw0kucm8D5MBLMXzt0PXf1PQMJGfF4zSq1zEp9irq8LbcCRC1llav1Jq1dFDYfePGVR4zR3YnJnvy00FukXUTEy');
 
@@ -117,49 +112,26 @@ export class MoviePaymentComponent implements OnInit{
       if (error) {
         console.log("Error while trying to pay", error);
       } else if (paymentIntent?.status === 'succeeded') {
-        this.movieFacade.addMovieForPerson(this.movieId);
-        this.router.navigateByUrl('movies/list');
-        console.log("Payment completed successfully", paymentIntent.id);
+        let movieIds;
+        if(this.movieId) movieIds = [this.movieId];
+        else{
+          this.movieFacade.selectCartMovies$.pipe(takeUntil(this.unsubscribe$)).subscribe(movies => {
+            if(movies) movieIds = movies.map(m => m.movieId);
+          });
+        }
+
+        if(movieIds){
+        this.movieFacade.addMovieForPerson(movieIds);
+        this.movieFacade.clearShoppingCart();
+        }
       }
     },
     error: err => console.error("Observable error:", err)
   });
-
-    // this.paymentFacade.confirmPayment(this.clientSecret, this.card);
 }
 
-
-  // pay() {
-  //   const confirmParams: ConfirmPaymentParams = {
-  //     return_url: "http://localhost:4200/movies",
-  //   };
-  //   this.paymentFacade.confirmPayment(this.elements, this.clientSecret,confirmParams);
-  // }
-  // movieId?: number | null;
-
-  // private unsubscribe$ = new Subject<void>();
-
-  // paymentForm!: FormGroup;
-
-  // constructor(private route: ActivatedRoute){}
-
-  // ngOnInit(): void {
-  //   this.movieId = Number(this.route.snapshot.paramMap.get('movieId'));
-
-  //   this.paymentForm = new FormGroup(
-  //   {
-  //     name: new FormControl('', [Validators.required]),
-  //     cardNumber: new FormControl('', [Validators.required]),
-  //     cardDate: new FormControl('', [Validators.required]),
-  //     cardCVV: new FormControl('', [Validators.required]),
-
-  // },
-  // );
-
-  // }
-
-  // ngOnDestroy(): void {
-  //     this.unsubscribe$.next();
-  //     this.unsubscribe$.complete();
-  // }
+    getTotalPrice(movies: MovieItem[]): number {
+    if (!movies) return 0;
+    return movies.reduce((total, movie) => total + movie.price, 0);
+}
 }
