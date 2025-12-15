@@ -33,7 +33,7 @@ jobs:
 
       - name: Upload all apps to S3
         run: |
-          aws s3 sync dist/shell/ s3://${{ secrets.S3_BUCKET }}/shell --delete
+          aws s3 sync dist/shell/ s3://${{ secrets.S3_BUCKET }} --delete
           aws s3 sync dist/auth/ s3://${{ secrets.S3_BUCKET }}/auth --delete
           aws s3 sync dist/movies/ s3://${{ secrets.S3_BUCKET }}/movies --delete
           aws s3 sync dist/payment/ s3://${{ secrets.S3_BUCKET }}/payment --delete
