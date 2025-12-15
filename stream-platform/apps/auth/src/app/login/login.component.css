@@ -1,0 +1,3 @@
+::ng-deep .mat-mdc-progress-spinner circle {
+    stroke: var(--color-primary) !important;
+}

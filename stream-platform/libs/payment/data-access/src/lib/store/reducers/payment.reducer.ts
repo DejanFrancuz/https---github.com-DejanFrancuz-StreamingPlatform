@@ -13,6 +13,7 @@ export interface PaymentState {
   error: string | null;
 }
 
+// inicijalno stanje state-a
 export const initialState: PaymentState = {
   clientSecret: null,
   paymentIntentId: null,

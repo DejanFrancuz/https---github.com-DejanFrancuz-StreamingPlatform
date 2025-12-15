@@ -3,7 +3,7 @@
 >
   <div class="text-2xl font-bold">StreamPlatform</div>
   <div class="flex items-center gap-sm">
-    <span class="material-symbols-outlined">search</span>
+    <!-- <span class="material-symbols-outlined">search</span> -->
     <span (click)="toggleTheme()" class="material-symbols-outlined cursor-pointer">
       sunny
     </span>
@@ -35,6 +35,7 @@
           *ngIf="isOpen"
           (closeDropdown)="closeDropdown()"
           (goToProfile)="onProfile(person.userId)"
+          (goToMovies)="onFindMovies()"
         ></lib-person-dropdown>
       </div>
     </div>

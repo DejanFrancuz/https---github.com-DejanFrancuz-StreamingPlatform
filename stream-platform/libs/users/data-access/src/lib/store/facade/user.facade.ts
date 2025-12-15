@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store, Action } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
 import * as UserActions from '../actions/user.actions';
 import * as UserSelectors from '../selectors/user.selectors';
@@ -29,6 +29,7 @@ export class UserFacade {
     this.store.dispatch(UserActions.getUserById({ userId }));
   }
 
+  // fasadna akcija koja se poziva iz create-edit.component.ts za kreiranje korisnika
   createUser(user: User){
     this.store.dispatch(UserActions.createUser({ user }));
   }

@@ -3,6 +3,7 @@ import { LoginForm } from '../models/Login';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Person } from '../models/Person';
+import { environment } from '@env';
 
 @Injectable({
   providedIn: 'root',
@@ -10,20 +11,21 @@ import { Person } from '../models/Person';
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
+  // poziv login-a i prihvatanje podataka o osobi
   login(req: LoginForm): Observable<Person> {
     return this.httpClient.post<Person>(
-      'http://localhost:8080/auth/login',
+      `${environment.backendApiUrl}auth/login`,
       req
     );
   }
 
   logout(): Observable<void> {
-    return this.httpClient.post<void>('http://localhost:8080/auth/logout', {});
+    return this.httpClient.post<void>(`${environment.backendApiUrl}auth/logout`, {});
   }
 
   getPersonData(): Observable<Person> {
     return this.httpClient.get<Person>(
-      'http://localhost:8080/auth/get-person',
+      `${environment.backendApiUrl}auth/get-person`,
     );
   }
 }

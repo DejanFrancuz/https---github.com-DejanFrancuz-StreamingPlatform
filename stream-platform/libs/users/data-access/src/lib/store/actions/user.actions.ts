@@ -9,6 +9,7 @@ export const getUserByEmail = createAction('[User] Get User by Email',  props<{ 
 
 export const updateUser = createAction('[User] Update User',  props<{ user: User }>());
 
+// akcija za registraciju iz user.actions.ts fajla
 export const createUser = createAction('[User] Create User',  props<{ user: User }>());
 
 export const deleteUser = createAction('[User] Delete User',  props<{ userId: number }>());

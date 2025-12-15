@@ -30,7 +30,8 @@
       "@stream-platform/types": ["libs/common/types/index.ts"],
       "@stream-platform/users-data-access": [
         "libs/users/data-access/src/index.ts"
-      ]
+      ],
+      "@env": ["environments/environment.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

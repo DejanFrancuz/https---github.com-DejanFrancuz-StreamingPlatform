@@ -1,3 +1,4 @@
+<div *ngIf="(loading$ | async) === false; else spinner">
 <div class="py-8 px-20 bg-surface rounded text-text max-w-2xl mx-auto">
   <h2 class="text-2xl font-semibold mb-6 text-primary">{{ isEditMode ?  'Edit User' : 'Create account'}}</h2>
 
@@ -88,3 +89,8 @@
     </div>
   </form>
 </div>
+</div>
+
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>

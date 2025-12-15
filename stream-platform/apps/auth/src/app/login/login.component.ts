@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthFacade } from '@stream-platform/auth-data-access';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ export class LoginComponent {
 
   submitted = false;
 
+  loading$!: Observable<boolean>;
+
   constructor(
     private fb: FormBuilder,
     private authFacade: AuthFacade,
@@ -21,6 +24,10 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', Validators.required],
+    });
+    this.authFacade.loaded$.subscribe((loaded) => {
+      console.log("loading is " + loaded);
+      this.loading$ = this.authFacade.loaded$;
     });
   }
 

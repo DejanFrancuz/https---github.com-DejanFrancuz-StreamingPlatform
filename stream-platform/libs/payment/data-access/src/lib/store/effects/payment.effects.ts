@@ -21,28 +21,12 @@ export class PaymentEffects {
         this.paymentService.createPaymentIntent(paymentIntentRequests).pipe(
           mergeMap(response => [
             PaymentActions.PaymentActionsApi.createIntentSuccess({ clientSecret: response.clientSecret }),
-            // PaymentActions.PaymentActions.confirmPayment({ paymentIntentId: response.clientSecret, card: response.card })
           ]),
           catchError(error => of(PaymentActions.PaymentActionsApi.createIntentFail({ error })))
           )
       )
     )
   );
-
-//   autoConfirm$ = createEffect(() =>
-//     this.actions$.pipe(
-//       ofType(PaymentActions.PaymentActionsApi.createIntentSuccess),
-//       // ovde možeš da dodaš dodatni operator da sačeka dok ne bude spreman card
-//       withLatestFrom(this.paymentService.getCardElement$()),
-//     filter(([_, card]) => !!card), // osigurava da card postoji
-//     mergeMap(([{ clientSecret }, card]) =>
-//       this.paymentService.confirmPayment(clientSecret, card).pipe(
-//         map(( response ) => PaymentActions.PaymentActionsApi.confirmPaymentSuccess(response)),
-//         catchError((error) => of(PaymentActions.PaymentActionsApi.confirmPaymentFail(error)))
-//       )
-//     )
-//   )
-// );
 
   confirmPayment$ = createEffect(() =>
   this.actions$.pipe(

@@ -1,6 +1,6 @@
 <div class="w-[44rem] flex justify-between items-end mb-4">
   <mat-tab-group [(selectedIndex)]="selectedTabIndex" class="w-fit">
-    <mat-tab class="font-semibold" [label]= "isAdmin ? 'All Movies' : 'Shop Movies'"></mat-tab>
+    <mat-tab class="font-semibold" [label]= "isAdmin ? 'All Movies' : 'Movies Store'"></mat-tab>
     <mat-tab *ngIf="!isAdmin"  class="font-semibold" label="My Movies"></mat-tab>
   </mat-tab-group>
 

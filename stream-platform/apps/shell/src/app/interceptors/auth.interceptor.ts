@@ -12,6 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const authReq = req.clone({ withCredentials: true });
     return next.handle(authReq).pipe(
       catchError((err: HttpErrorResponse) => {
+        // u slucaju da dobijemo 401 gresku, preusmeravamo korisnika na login stranicu
         if (err.status === 401) {
           this.router.navigate(['/login']);
         }

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthFacade } from '@stream-platform/auth-data-access';
 
 @Component({
@@ -10,25 +11,30 @@ import { AuthFacade } from '@stream-platform/auth-data-access';
 })
 export class PersonDropdownComponent {
 
-  constructor(private authFacade: AuthFacade) {}
+  constructor(private authFacade: AuthFacade, private router: Router) {}
 
   @Output()
   closeDropdown = new EventEmitter<void>();
 
+
   @Output()
   goToProfile = new EventEmitter<void>();
 
-  onClose() {
-    this.closeDropdown.emit();
+  @Output()
+  goToMovies = new EventEmitter<void>();
+
+  onFind() {
+    this.goToMovies.emit();
   }
 
   onLogout(){
     this.authFacade.logout();
-    this.onClose();
+    this.closeDropdown.emit();
   }
 
   onProfile(){
     this.goToProfile.emit();
+    // this.closeDropdown.emit();
   }
 
 }

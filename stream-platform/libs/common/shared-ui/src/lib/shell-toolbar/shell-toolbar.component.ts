@@ -6,6 +6,7 @@ import { Person } from 'libs/auth/data-access/src/lib/models/Person';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { MovieFacade } from '@stream-platform/movies-data-access';
 import { Router } from '@angular/router';
+import { on } from '@ngrx/store';
 
 @Component({
   selector: 'lib-shell-toolbar',
@@ -45,6 +46,12 @@ export class ShellToolbarComponent{
 
   onProfile(userId: number){
     this.router.navigateByUrl(`auth/create-edit/${userId}`);
+    this.isOpen = false;
+  }
+
+  onFindMovies(){
+    console.log("brt?");
+    this.router.navigateByUrl('movies/list');
     this.isOpen = false;
   }
 }

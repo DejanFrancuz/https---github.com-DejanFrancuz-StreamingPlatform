@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MovieItem } from '@stream-platform/movies-data-access';
+import { environment } from '@env';
+
 
 @Component({
   selector: 'app-movie-card',
@@ -8,5 +10,7 @@ import { MovieItem } from '@stream-platform/movies-data-access';
   styleUrl: './movie-card.component.css',
 })
 export class MovieCardComponent {
+  environment = environment;
+  
   @Input() movie!: MovieItem;
 }

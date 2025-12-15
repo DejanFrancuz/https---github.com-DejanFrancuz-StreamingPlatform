@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@stream-platform/auth-data-access';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shell-layout',
@@ -10,13 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class ShellLayoutComponent implements OnInit{
 
-  public personLoading$!: Observable<boolean>;
 
   constructor(private authFacade: AuthFacade) {}
 
+  // poziv facade da se ucita osoba pri inicijalizaciji layouta iz layout.component.ts
   ngOnInit(): void {
-    this.personLoading$ = this.authFacade.personLoaded$;
-    this.authFacade.init();
+    this.authFacade.loadPerson();
   }
-
 }

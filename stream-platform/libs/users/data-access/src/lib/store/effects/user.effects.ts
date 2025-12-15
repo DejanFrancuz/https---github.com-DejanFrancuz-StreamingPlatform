@@ -44,6 +44,7 @@ export class UserEffects {
     )
   );
 
+  // efekat koji osluskuje akciju i poziva servisnu metodu za kreiranje korisnika
   createUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.createUser),

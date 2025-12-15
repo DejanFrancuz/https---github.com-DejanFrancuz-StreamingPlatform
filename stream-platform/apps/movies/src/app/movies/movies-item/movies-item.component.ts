@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MovieItem } from '@stream-platform/movies-data-access';
+import { environment } from '@env';
 
 
 @Component({
@@ -9,6 +10,8 @@ import { MovieItem } from '@stream-platform/movies-data-access';
   styleUrl: './movies-item.component.css'
 })
 export class MoviesItemComponent {
+
+  environment = environment;
 
   @Input()
   movieItem!: MovieItem;

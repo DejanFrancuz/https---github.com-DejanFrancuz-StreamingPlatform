@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { loadStripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
 import { PaymentIntentRequest, PaymentRequest } from '../models/Payment';
+import { environment } from '@env';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,7 @@ export class PaymentService {
   createPaymentIntent(paymentIntentRequests: PaymentIntentRequest[]): Observable<any> {
     const request: PaymentRequest = { items: paymentIntentRequests };
     return this.httpClient.post<any>(
-      'http://localhost:8080/api/payments/create-intent',
+      `${environment.backendApiUrl}api/payments/create-intent`,
       request
     );
   }
@@ -37,7 +38,7 @@ export class PaymentService {
   confirmPayment(clientSecret: string): Observable<any> {
     const paymentIntentId = clientSecret.split('_secret')[0];
     return this.httpClient.post<any>(
-      `http://localhost:8080/api/payments/confirm-payment`, { paymentIntentId }
+      `${environment.backendApiUrl}api/payments/confirm-payment`, { paymentIntentId }
     );
   }
 }

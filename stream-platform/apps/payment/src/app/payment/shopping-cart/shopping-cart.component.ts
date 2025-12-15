@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieFacade, MovieItem } from '@stream-platform/movies-data-access';
 import { Observable } from 'rxjs';
+import { environment } from '@env';
+
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class ShoppingCartComponent implements OnInit{
 
-
+  environment = environment;
 
   cartMovies$!: Observable<MovieItem[] | null>;
 

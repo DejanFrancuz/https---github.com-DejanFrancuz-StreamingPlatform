@@ -6,7 +6,6 @@ import { PageEntity } from '@stream-platform/types';
 export const MOVIE_FEATURE_KEY = 'movie';
 
 export interface MovieState {
-  // moviesList: MovieItem[] | null;
   moviesList: PageEntity<MovieItem>
   myMoviesResult: PageEntity<MovieItem>;
   cartMovies: MovieItem[];
@@ -15,6 +14,7 @@ export interface MovieState {
   error: string | null;
 }
 
+// inicijalno stanje state-a
 export const initialState: MovieState = {
   moviesList: {
     content: [],
@@ -45,6 +45,7 @@ export const userReducer = createReducer(
     ({ ...state, selectedMovie: action.movie, loading: false })),
   on(MovieActionsApi.getMoviesFail, (state, action) => ({ ...state, error: action.error, loading: false })),
   on(MovieActionsApi.getMyMoviesFail, (state, action) => ({ ...state, error: action.error, loading: false })),
+  // ostale akcije ...
   on(MovieActions.addMovieToCart, (state, action) => {
     const movieExist = state.cartMovies.some((movie) => movie.movieId === action.movie.movieId)
 
@@ -52,10 +53,12 @@ export const userReducer = createReducer(
     : [...state.cartMovies, action.movie]
     return {...state, cartMovies: newCart}
   }),
+  // de-selekcija filma iz korpe
   on(MovieActions.removeMovieFromCart, (state, action) => {
     const newCart = state.cartMovies.filter( movie => movie.movieId !== action.movieId )
     return {...state, cartMovies: newCart}
   }),
+  // brisanje cele korpe
   on(MovieActions.clearShoppingCart, (state) => {
     return {...state, cartMovies: []}
   }),

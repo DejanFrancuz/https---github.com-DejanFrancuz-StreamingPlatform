@@ -11,11 +11,12 @@ import { MovieFacade } from '../facade/movie.facade';
 
 @Injectable()
 export class MovieEffects {
+  // efekat za dobijanje svih filmova
   getMovies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MovieActions.getMovies),
       switchMap((action) =>
-        this.movieService.getMovies( false, action.pageQuery, action.filter).pipe(
+        this.movieService.getMovies(false, action.pageQuery, action.filter).pipe(
           map(movies =>
             MovieActionsApi.getMoviesSuccess({ moviesList: movies })
         ),

@@ -45,6 +45,12 @@
               "maximumError": "8kb"
             }
           ],
+          "fileReplacements": [
+            {
+              "replace": "environments/environment.ts",
+              "with": "environments/environment.prod.ts"
+            }
+          ],
           "outputHashing": "all",
           "customWebpackConfig": {
             "path": "apps/movies/webpack.prod.config.ts"

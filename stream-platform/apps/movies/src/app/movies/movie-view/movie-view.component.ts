@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthFacade, Person } from '@stream-platform/auth-data-access';
 import { MovieFacade, MovieItem } from '@stream-platform/movies-data-access';
+import { environment } from '@env';
 
 import { Subject, takeUntil } from 'rxjs';
 
@@ -16,6 +17,8 @@ export class MovieViewComponent implements OnInit, OnDestroy {
   movieId!: number;
   movie!: MovieItem | null;
   person!: Person | null;
+
+  environment = environment;
 
   private unsubscribe$ = new Subject<void>();
 

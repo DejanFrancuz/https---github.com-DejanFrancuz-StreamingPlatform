@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User, UserFacade } from '@stream-platform/users-data-access';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../validators/password.validator';
 
@@ -20,6 +20,8 @@ export class CreateEditUserComponent implements OnInit, OnDestroy {
 
   editForm!: FormGroup;
 
+  loading$!: Observable<boolean>;
+
   constructor(private userFacade: UserFacade, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -27,6 +29,8 @@ export class CreateEditUserComponent implements OnInit, OnDestroy {
     this.isEditMode = !!this.userId;
 
     this.userFacade.getUserById(this.userId);
+
+    this.loading$ = this.userFacade.selectLoaded$;
 
     this.userFacade.selectSelectedUser$
       .pipe(takeUntil(this.unsubscribe$))
@@ -49,8 +53,8 @@ export class CreateEditUserComponent implements OnInit, OnDestroy {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       permissions: new FormControl([''], [Validators.required]),
-
-       ...(this.isEditMode
+// u slucaju update-a korisnika, promena lozinke je opciona
+      ...(this.isEditMode
       ? {
           changePassword: new FormControl(false),
           password: new FormControl(''),
@@ -68,9 +72,11 @@ export class CreateEditUserComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (!this.editForm.valid) return;
 
+    // izvlacenje vrednosti iz forme
     const formValue = this.editForm.value as {
     email: string;
     username: string;
+    // ostali atributi firstName, lastName...
     firstName: string;
     lastName: string;
     permissions: string[];
@@ -81,17 +87,18 @@ export class CreateEditUserComponent implements OnInit, OnDestroy {
 
     const { email, username, firstName, lastName, permissions, changePassword, password } =
       formValue;
-
+    // provera da nijedno polje nije null ili undefined
     if (
       email == null ||
       username == null ||
+      // ostali atributi firstName, lastName...
       firstName == null ||
       lastName == null ||
       permissions == null ||
       password == null
     ) {
       console.error(
-        'Neka polja su null/undefined i forma ne bi trebalo da je validna.'
+        'Forma nije validna jer je neko polje null/undefined.'
       );
       return;
     }
@@ -99,6 +106,7 @@ export class CreateEditUserComponent implements OnInit, OnDestroy {
       userId: this.userId || undefined,
       email,
       username,
+      // ostali atributi firstName, lastName...
       firstName,
       lastName,
       permissions,

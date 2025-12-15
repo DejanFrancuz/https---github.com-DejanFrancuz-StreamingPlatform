@@ -21,13 +21,11 @@ export const initialState: AuthState = {
 export const authReducer = createReducer(
   initialState,
   on(AuthActions.login,       state => ({ ...state, loading: true, error: null })),
-  on(AuthActionsApi.loginSuccess, (state, action) => 
+  on(AuthActionsApi.loginSuccess, (state, action) =>
     ({ ...state, person: action.personData, loading: false })),
   on(AuthActionsApi.loginFailure, (state, action) => ({ ...state, error: action.error, loading: false })),
-  on(AuthActionsApi.logoutSuccess, _ => initialState),
-
   on(AuthActions.loadPerson, state => ({ ... state, personLoading: true, error: null })),
-  on(AuthActionsApi.loadPersonSuccess, (state, action) => 
+  on(AuthActionsApi.loadPersonSuccess, (state, action) =>
     ({ ...state, person: action.personData, personLoading: false })),
   on(AuthActionsApi.loadPersonFail, (state, action) => ({ ...state, error: action.error, personLoading: false })),
 );

@@ -1,6 +1,7 @@
-import { createReducer, on, Store } from '@ngrx/store';
+import { createReducer, on, Store, Action } from '@ngrx/store';
 import {UserActions, UserActionsApi} from '../actions/user-index.actions';
 import { User } from '../../models/User';
+import { createUserSuccess } from '../actions/user-api.actions';
 
 export const USER_FEATURE_KEY = 'user';
 
@@ -18,9 +19,13 @@ export const initialState: UserState = {
   error: null,
 };
 
+// reducer koji menja stanje state-a na osnovu akcija
 export const userReducer = createReducer(
   initialState,
-  on(UserActions.getUsers,       state => ({ ...state, loading: true, error: null })),
+  on(UserActions.createUser,       state => ({ ...state, loading: true, error: null })),
+  on(UserActionsApi.createUserSuccess,       state => ({ ...state, loading: false, error: null })),
+  on(UserActionsApi.createUserFail,       (state, action) => ({ ...state, loading: false, error: action.error })),
+  // ...ostale akcije u reducer-u
   on(UserActionsApi.getUsersSuccess, (state, action) =>
     ({ ...state, usersList: action.usersList, loading: false })),
   on(UserActionsApi.getUserByIdSuccess, (state, action) =>

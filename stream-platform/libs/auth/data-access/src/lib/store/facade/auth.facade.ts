@@ -21,7 +21,8 @@ export class AuthFacade {
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
-  init(){
+  // aktiviranje akcije za poziv ka bekendu u auth.facade.ts
+  loadPerson(){
     this.store.dispatch(AuthActions.loadPerson());
   }
 

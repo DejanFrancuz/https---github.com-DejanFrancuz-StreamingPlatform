@@ -42,6 +42,7 @@ export class AuthEffects {
     )
   );
 
+  // ovde efekat reaguje na loadPerson akciju i aktivira poziv u auth.service.ts
   loadPerson$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loadPerson),

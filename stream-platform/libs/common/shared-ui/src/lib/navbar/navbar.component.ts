@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
   private unsubscribe$ = new Subject<void>();
 
   constructor(private authFacade: AuthFacade){}
+  // u ngOnInit se pretplacujemo na izabranu osobu iz facade-a
   ngOnInit(): void {
     this.authFacade.selectedAuthPerson$
       .pipe(takeUntil(this.unsubscribe$))
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
     throw new Error('Method not implemented.');
   }
 
+  // geter koji proverava da li osoba ima admin privilegije
   get isAdmin(){
     return this.person?.permissions.includes('ADMIN');
   }
