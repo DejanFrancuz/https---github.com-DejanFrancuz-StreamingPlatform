@@ -9,16 +9,13 @@ import config from './module-federation.config';
 export default withModuleFederation(
   {
     ...config,
-    /*
-     * Remote overrides for production.
-     * Each entry is a pair of a unique name and the URL where it is deployed.
-     *
-     * e.g.
-     * remotes: [
-     *   ['app1', 'https://app1.example.com'],
-     *   ['app2', 'https://app2.example.com'],
-     * ]
-     */
+    remotes: [
+      ['dashboard', 'https://dfpybtxmxgkxr.cloudfront.net/dashboard'],
+      ['users', 'https://dfpybtxmxgkxr.cloudfront.net/users'],
+      ['movies', 'https://dfpybtxmxgkxr.cloudfront.net/movies'],
+      ['auth', 'https://dfpybtxmxgkxr.cloudfront.net/auth'],
+      ['payment', 'https://dfpybtxmxgkxr.cloudfront.net/payment'],
+    ],
   },
   { dts: false }
 );
