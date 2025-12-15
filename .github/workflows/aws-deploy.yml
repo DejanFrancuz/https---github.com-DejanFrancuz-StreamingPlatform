@@ -23,13 +23,13 @@ jobs:
         run: npm ci
 
       - name: Build all projects
-        run: npx nx run-many --target=build --all
+        run: npx nx run-many --target=build --all --exclude=@stream-platform/source
 
       - name: Run unit tests
-        run: npx nx run-many --target=test --all
+        run: npx nx run-many --target=test --all --exclude=@stream-platform/source
 
       - name: Run lint
-        run: npx nx run-many --target=lint --all
+        run: npx nx run-many --target=lint --all --exclude=@stream-platform/source
 
       - name: Upload all apps to S3
         run: |
