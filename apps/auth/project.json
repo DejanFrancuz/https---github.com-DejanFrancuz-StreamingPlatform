@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/auth",
         "index": "apps/auth/src/index.html",
-        "main": "apps/auth/src/app/auth.module.ts",
+        "main": "apps/auth/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/auth/tsconfig.app.json",
         "inlineStyleLanguage": "css",

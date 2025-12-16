@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/payment",
         "index": "apps/payment/src/index.html",
-        "main": "apps/payment/src/app/payment.module.ts",
+        "main": "apps/payment/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/payment/tsconfig.app.json",
         "assets": [

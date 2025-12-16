@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/dashboard",
         "index": "apps/dashboard/src/index.html",
-        "main": "apps/dashboard/src/app/dashboard.module.ts",
+        "main": "apps/dashboard/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/dashboard/tsconfig.app.json",
         "inlineStyleLanguage": "css",

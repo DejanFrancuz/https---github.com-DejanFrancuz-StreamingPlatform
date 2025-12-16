@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/movies",
         "index": "apps/movies/src/index.html",
-        "main": "apps/movies/src/app/movies.module.ts",
+        "main": "apps/movies/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/movies/tsconfig.app.json",
         "inlineStyleLanguage": "css",

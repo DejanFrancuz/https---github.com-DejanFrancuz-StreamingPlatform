@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/users",
         "index": "apps/users/src/index.html",
-        "main": "apps/users/src/app/users.module.ts",
+        "main": "apps/users/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/users/tsconfig.app.json",
         "inlineStyleLanguage": "css",
