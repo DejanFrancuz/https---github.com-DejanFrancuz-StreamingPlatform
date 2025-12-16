@@ -3,7 +3,7 @@ import { LoginForm } from '../models/Login';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Person } from '../models/Person';
-import { environment } from '@env';
+import { environment } from '@stream-platform/env';
 
 @Injectable({
   providedIn: 'root',

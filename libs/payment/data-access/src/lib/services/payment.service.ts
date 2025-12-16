@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { loadStripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
 import { PaymentIntentRequest, PaymentRequest } from '../models/Payment';
-import { environment } from '@env';
+import { environment } from '@stream-platform/env';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MovieItem } from '@stream-platform/movies-data-access';
-import { environment } from '@env';
+import { environment } from '@stream-platform/env';
 
 
 @Component({
@@ -11,6 +11,6 @@ import { environment } from '@env';
 })
 export class MovieCardComponent {
   environment = environment;
-  
+
   @Input() movie!: MovieItem;
 }

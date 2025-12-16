@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieFacade, MovieItem } from '@stream-platform/movies-data-access';
 import { Observable } from 'rxjs';
-import { environment } from '@env';
+import { environment } from '@stream-platform/env';
 
 
 

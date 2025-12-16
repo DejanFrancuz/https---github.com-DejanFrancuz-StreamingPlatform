@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Build all projects
-        run: npx nx run-many --target=build --all --exclude=@stream-platform/source
+        run: npx nx run-many --target=build --all --configuration=production --skip-nx-cache --exclude=@stream-platform/source
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3

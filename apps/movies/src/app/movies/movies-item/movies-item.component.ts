@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MovieItem } from '@stream-platform/movies-data-access';
-import { environment } from '@env';
+import { environment } from '@stream-platform/env';
 
 
 @Component({

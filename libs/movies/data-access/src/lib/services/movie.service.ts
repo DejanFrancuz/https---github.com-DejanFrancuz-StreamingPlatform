@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MovieFilter, MovieItem } from '../models/Movie';
 import { PageEntity, PageQuery } from '@stream-platform/types';
-import { environment } from '@env';
+import { environment } from '@stream-platform/env';
 
 @Injectable({
   providedIn: 'root',
