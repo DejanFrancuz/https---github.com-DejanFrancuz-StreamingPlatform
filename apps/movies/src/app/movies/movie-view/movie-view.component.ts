@@ -34,7 +34,6 @@ export class MovieViewComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log("for commit");
     this.movieId = Number(this.route.snapshot.paramMap.get('movieId'));
 
     this.movieFacade.getMovieById(this.movieId);
