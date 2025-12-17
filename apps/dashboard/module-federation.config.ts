@@ -5,6 +5,20 @@ const config: ModuleFederationConfig = {
   exposes: {
     './Module': 'apps/dashboard/src/app/dashboard.module.ts',
   },
+  shared: (libraryName, sharedConfig) => {
+    if (
+      libraryName === '@angular/platform-browser' ||
+      libraryName === '@angular/platform-browser-dynamic'
+    ) {
+      return {
+        singleton: true,
+        strictVersion: false,
+        requiredVersion: false,
+      };
+    }
+
+    return sharedConfig;
+  },
 };
 
 /**

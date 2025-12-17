@@ -21,6 +21,20 @@ const config: ModuleFederationConfig = {
     ['auth', 'http://localhost:4202/'],
     ['payment', 'http://localhost:4205/'],
   ],
+  shared: (libraryName, sharedConfig) => {
+    if (
+      libraryName === '@angular/platform-browser' ||
+      libraryName === '@angular/platform-browser-dynamic'
+    ) {
+      return {
+        singleton: true,
+        strictVersion: false,
+        requiredVersion: false,
+      };
+    }
+
+    return sharedConfig;
+  },
 };
 
 /**
