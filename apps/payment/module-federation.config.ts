@@ -7,7 +7,11 @@ const config: ModuleFederationConfig = {
     './Module': 'apps/payment/src/app/payment.module.ts',
   },
   shared: (libraryName, defaultConfig) => {
-  if (libraryName.startsWith('@angular/')) {
+  if (libraryName.startsWith('@angular/') ||
+    libraryName === 'rxjs' ||
+    libraryName === 'rxjs/operators' ||
+    libraryName === 'tslib'
+  ) {
     return { ...defaultConfig, eager: true };
   }
   return defaultConfig;

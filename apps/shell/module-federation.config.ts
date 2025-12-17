@@ -22,7 +22,11 @@ const config: ModuleFederationConfig = {
     ['payment', 'http://localhost:4205/'],
   ],
   shared: (libraryName, defaultConfig) => {
-  if (libraryName.startsWith('@angular/')) {
+  if (libraryName.startsWith('@angular/') ||
+    libraryName === 'rxjs' ||
+    libraryName === 'rxjs/operators' ||
+    libraryName === 'tslib'
+  ) {
     return { ...defaultConfig, eager: true };
   }
   return defaultConfig;
