@@ -1,23 +1,17 @@
 import { ModuleFederationConfig } from '@nx/module-federation';
 
+
 const config: ModuleFederationConfig = {
   name: 'payment',
   exposes: {
     './Module': 'apps/payment/src/app/payment.module.ts',
   },
   shared: (libraryName, defaultConfig) => {
-    if (
-      libraryName === '@angular/platform-browser' ||
-      libraryName === '@angular/platform-browser-dynamic'
-    ) {
-      return {
-        ...defaultConfig,
-        eager: false,
-      };
-    }
-
-    return defaultConfig;
-  },
+  if (libraryName.startsWith('@angular/')) {
+    return { ...defaultConfig, eager: true };
+  }
+  return defaultConfig;
+},
 };
 
 /**

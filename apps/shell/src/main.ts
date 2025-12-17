@@ -1,18 +1,1 @@
 import('./bootstrap').catch((err) => console.error(err));
-
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
-
-const isProd = window.location.hostname !== 'localhost';
-const envFile = isProd ? 'environment.prod' : 'environment';
-
-fetch(`/environments/${envFile}.ts`)
-  .then((r) => r.json())
-  .then((config) => {
-    (window as any).__env = config;
-    platformBrowserDynamic()
-      .bootstrapModule(AppModule, {
-        ngZoneEventCoalescing: true,
-      })
-      .catch(console.error);
-  });
