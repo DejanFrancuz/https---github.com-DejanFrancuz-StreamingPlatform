@@ -31,7 +31,8 @@
       "@stream-platform/users-data-access": [
         "libs/users/data-access/src/index.ts"
       ],
-      "@stream-platform/env": ["libs/environments/src/index.js"],
+      "@stream-platform/env": ["environments/environment.ts"],
+      "@stream-platform/env/*": ["environments/*"],
     }
   },
   "exclude": ["node_modules", "tmp"]
