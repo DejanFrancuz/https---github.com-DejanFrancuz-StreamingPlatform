@@ -5,19 +5,18 @@ const config: ModuleFederationConfig = {
   exposes: {
     './Module': 'apps/users/src/app/users.module.ts',
   },
-  shared: (libraryName, sharedConfig) => {
+  shared: (libraryName, defaultConfig) => {
     if (
       libraryName === '@angular/platform-browser' ||
       libraryName === '@angular/platform-browser-dynamic'
     ) {
       return {
-        singleton: true,
-        strictVersion: false,
-        requiredVersion: false,
+        ...defaultConfig,
+        eager: false,
       };
     }
 
-    return sharedConfig;
+    return defaultConfig;
   },
 };
 
