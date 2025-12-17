@@ -22,8 +22,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build all projects
-        run: npx nx run-many --target=build --all --configuration=production --skip-nx-cache --exclude=@stream-platform/source
+      - name: Build shell
+        run: npx nx build shell --configuration=production --skip-nx-cache
+
+      - name: Build remote apps
+        run: |
+          npx nx run-many \
+          --target=build \
+          --projects=auth,movies,payment,dashboard,users \
+          --configuration=production \
+          --skip-nx-cache
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
