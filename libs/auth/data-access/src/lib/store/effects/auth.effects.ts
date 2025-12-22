@@ -18,6 +18,7 @@ export class AuthEffects {
           map(personData => {
             this.router.navigate(['/dashboard']);
             this.toastrService.success("You are logged in!\n \tWelcome!");
+            console.log("PERSON DATA:", personData);
             return AuthActionsApi.loginSuccess({ personData })
         }),
           catchError(error => {

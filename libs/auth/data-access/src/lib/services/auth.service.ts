@@ -19,6 +19,13 @@ export class AuthService {
     );
   }
 
+  refresh(): Observable<Person> {
+    return this.httpClient.post<Person>(
+      `${environment.backendApiUrl}auth/refresh`,
+      {}
+    );
+  }
+
   logout(): Observable<void> {
     return this.httpClient.post<void>(`${environment.backendApiUrl}auth/logout`, {});
   }
