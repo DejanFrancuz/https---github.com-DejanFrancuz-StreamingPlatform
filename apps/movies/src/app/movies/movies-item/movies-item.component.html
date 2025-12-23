@@ -26,8 +26,8 @@
   </div>
   </div>
 
-  <span #titleRef class="truncate max-w-32 text-sm pt-2 cursor-default" [matTooltip]="movieItem.title"
-  matTooltipShowDelay="500" [matTooltipDisabled]=" !isTextOverflowing(titleRef)"
+  <span #titleRef class="truncate max-w-32 text-sm pt-2 cursor-default" [matTooltip]="isOverflowing ? movieItem.title : null"
+  matTooltipShowDelay="500" [matTooltipDisabled]=" !isOverflowing"
   >
     {{ movieItem.title }}</span
   >

@@ -1,17 +1,34 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MovieItem } from '@stream-platform/movies-data-access';
 import { environment } from '@stream-platform/env';
-
 
 @Component({
   selector: 'app-movies-item',
   standalone: false,
   templateUrl: './movies-item.component.html',
-  styleUrl: './movies-item.component.css'
+  styleUrl: './movies-item.component.css',
 })
 export class MoviesItemComponent {
-
   environment = environment;
+
+  @ViewChild('titleRef')
+  titleRef!: ElementRef<HTMLElement>;
+
+  isOverflowing = false;
+
+  ngAfterViewInit() {
+    const el = this.titleRef.nativeElement;
+    setTimeout(() => {
+      this.isOverflowing = this.isTextOverflowing(el);
+    });
+  }
 
   @Input()
   movieItem!: MovieItem;
@@ -40,28 +57,28 @@ export class MoviesItemComponent {
   @Output()
   likeMovie = new EventEmitter<number>();
 
-  onBuyMovie(){
+  onBuyMovie() {
     this.buyMovie.emit(this.movieItem);
   }
 
-  onViewMovie(){
+  onViewMovie() {
     this.viewMovie.emit(this.movieItem.movieId);
   }
 
-  onDeleteMovie(){
+  onDeleteMovie() {
     this.deleteMovie.emit(this.movieItem.movieId);
   }
 
-  onWatchMovie(){
+  onWatchMovie() {
     this.watchMovie.emit(this.movieItem.movieId);
   }
 
   isTextOverflowing(element: HTMLElement): boolean {
-  return element.offsetWidth < element.scrollWidth;
-}
+    return element.offsetWidth < element.scrollWidth;
+  }
 
-onLikeMovie() {
-  this.isLiked = !this.isLiked;
-  this.likeMovie.emit(this.movieItem.movieId);
-}
+  onLikeMovie() {
+    this.isLiked = !this.isLiked;
+    this.likeMovie.emit(this.movieItem.movieId);
+  }
 }

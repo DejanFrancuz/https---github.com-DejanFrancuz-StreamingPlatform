@@ -1,14 +1,14 @@
  <!-- dinamicki prikaz sadrzaja navbar.component.html -->
 <nav class="pt-[--toolbar-height] bg-surface border-b-2 border-primary">
       <ul class="flex justify-center items-center p-xs gap-md">
-        <li class="nav-item text-sm font-medium">
+        <li *ngIf="person" class="nav-item text-sm font-medium">
           <a routerLink="/dashboard" routerLinkActive="active">DASHBOARD</a>
         </li>
         <!-- proveravamo privilegiju korisnika -->
         <li *ngIf="isAdmin"  class="nav-item text-sm">
           <a routerLink="/users" routerLinkActive="active">MEMBERS</a>
         </li>
-        <li class="nav-item text-sm">
+        <li *ngIf="person" class="nav-item text-sm">
           <a routerLink="/movies" routerLinkActive="active">MOVIES</a>
         </li>
         <!-- proveravamo da li je korisnik ulogovan -->
