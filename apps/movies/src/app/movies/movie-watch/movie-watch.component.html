@@ -2,13 +2,11 @@
   <video
   width="1040"
   height="440"
-  controls
+  crossorigin="use-credentials"
   autoplay
   muted
   >
-  <source [src]="environment.mediaApiUrl + 'api/movies/watch/' + movieId + '?format=mp4'" type="video/mp4"
-  controls
-  crossorigin="use-credentials">
+  <source [src]="environment.mediaApiUrl + 'api/movies/watch/' + movieId + '?format=mp4'" type="video/mp4">
   </video>
 
 </div>
