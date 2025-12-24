@@ -6,7 +6,9 @@
   autoplay
   muted
   >
-  <source [src]="environment.mediaApiUrl + 'api/movies/watch/' + movieId + '?format=mp4'" type="video/mp4">
+  <source [src]="environment.mediaApiUrl + 'api/movies/watch/' + movieId + '?format=mp4'" type="video/mp4"
+  controls
+  crossorigin="use-credentials">
   </video>
 
 </div>
